@@ -11,7 +11,7 @@ var https = require('https');
 var cors = require('cors')
 
 //Intern files
-var coordinatesRoute = require('./routes/coordinates-endpoint.js');
+var coordinatesRoute = require('./routes/coordinatesEndpoint.js');
 
 // ***** //
 // Setup //
@@ -31,7 +31,8 @@ app.use(bodyParser.json());
 // ******** //
 
 //Change that if needed
-mongoose.connect('mongodb://localhost:27017/TrackDB', { //TODO: Read from config file?
+
+mongoose.connect('mongodb://localhost:27017/TrackDB', { //TODO: Read from config file? Eventually design db layer
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
