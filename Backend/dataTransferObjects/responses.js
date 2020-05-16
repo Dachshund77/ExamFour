@@ -8,7 +8,7 @@ exports.ok = function ok(data) {
     }
     return {
         status: 'success',
-        data: [data]
+        data: data
     }
 }
 

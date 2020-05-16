@@ -105,12 +105,38 @@ router.route(deleteEndpoint)
         }
         catch (err) {
             console.log(err);
-            res.status(500).json('Internal server error');
+            res.status(500).json(responses.internalServerError("Unexpected error occured", err))
         }
     });
 
 //Get by id 
-
+const getByIdEndpoint = '/:_id';
+router.get(getByIdEndpoint, [isValidObjectID]);
+router.route(getByIdEndpoint)
+    .get(async function (req, res) {
+        try {
+            //delete
+            await Coordinate.findById( req.params._id , function (err, doc) {
+                if (err) {
+                    //catch all clasue
+                    res.status(500).json(responses.internalServerError("Database error occured", err));
+                }
+                else {
+                    if (doc == null) {
+                        //Could not find ressource
+                        res.status(404).json(responses.notFound("Ressource was not found for " + req.params._id));
+                    } else {
+                        //respond on succes //200
+                        res.status(200).json(responses.ok(doc));
+                    }
+                }
+            });
+        }
+        catch (err) {
+            console.log(err);
+            res.status(500).json(responses.internalServerError("Unexpected error occured", err))
+        }
+    });
 
 
 module.exports = router;
