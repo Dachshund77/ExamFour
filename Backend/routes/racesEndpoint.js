@@ -8,7 +8,7 @@ var isValidObjectID = require('../middlewares/isValidObjectID');
 
 var router = express.Router();
 
-//Post a Coordinate
+//Post a race
 router.post('/', [isValidModel(Race)], async function (req, res) {
     try {
         //Init values
@@ -38,7 +38,7 @@ router.post('/', [isValidModel(Race)], async function (req, res) {
     }
 });
 
-//Update a device 
+//Update a Race 
 router.put('/:_id', [
     isValidObjectID,
     isValidModel(Race)
@@ -75,7 +75,7 @@ router.put('/:_id', [
 });
 
 
-//Delete a device by id 
+//Delete a race by id 
 router.delete('/:_id', [isValidObjectID], async function (req, res) {
     try {
         //delete

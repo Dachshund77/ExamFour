@@ -20,9 +20,13 @@ router.post('/', [isValidModel(Coordinate)], async function (req, res) {
                 if (err.code === 11000) {
                     //duplicate key
                     res.status(400).json(responses.badRequest("Key exists already in database", err));
+                } else if (err instanceof mongoose.Error.ValidationError) {
+                    res.status(400).json(responses.badRequest("Request failed", err));
                 }
                 else if (err) { //need other error
                     //catch all clasue
+                    console.log(err)
+                    console.log('wtf')
                     res.status(500).json(responses.internalServerError("Database error occured", err));
                 }
             }

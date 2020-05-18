@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var pointSchema = require('./point').schema;
 
 //https://mongoosejs.com/docs/validation.html info about validation schemas
 //TODO FIX incosisten naming convention

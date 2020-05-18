@@ -4,11 +4,11 @@ var Schema = mongoose.Schema;
 //https://mongoosejs.com/docs/validation.html info about validation schemas
 //TODO incosisten naming convention
 //TODO possible imrpove with https://docs.mongodb.com/manual/reference/geojson/#point
-let boatSchema =
+const teamSchema =
     new Schema({
-        boatName: {
+        teamName: {
             type: String,
-            required: [true, 'Boat Name is required!']
+            required: [true, 'Team Name is required!']
         }
     });
 
@@ -16,15 +16,15 @@ let boatSchema =
  * Overwriting for custom JSON responses
  */
 //https://jsonapi.org/
-boatSchema.methods.toJSON = function () {
+teamSchema.methods.toJSON = function () {
     return {
-        type: 'Boat',
+        type: 'Team',
         _id: this._id,
         attributes: {
-            boatName: this.boatName,
+            teamName: this.teamName,
         },
         links: {
-            self: "http://localhost:3000/boats/" + this._id,
+            self: "http://localhost:3000/teams/" + this._id,
         },
         meta: {
             dbVersion: this.__v
@@ -32,5 +32,5 @@ boatSchema.methods.toJSON = function () {
     }
 }
 
-exports.schema = boatSchema;
-exports.model = mongoose.model('boatModel', boatSchema)
+exports.schema = teamSchema;
+exports.model = mongoose.model('teamModel', teamSchema)

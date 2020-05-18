@@ -12,7 +12,7 @@ var cors = require('cors')
 
 //Intern files
 var coordinatesRoute = require('./routes/coordinatesEndpoint.js');
-var boatsRoute = require('./routes/boatsEndpoint.js');
+var teamRoute = require('./routes/teamsEndpoint.js');
 var racesRoute = require('./routes/racesEndpoint.js');
 
 // ***** //
@@ -57,7 +57,7 @@ app.use(function (request, response, next) { //This is actuallya logger now that
 
 //Route init boatsRoute
 app.use('/coordinates', coordinatesRoute);
-app.use('/boats', boatsRoute);
+app.use('/teams', teamRoute);
 app.use('/races', racesRoute);
 
 
@@ -79,5 +79,7 @@ app.listen(3000, () => {
 
 //var httpsServer = https.createServer(credentials, app);
 //httpsServer.listen(3000);
+
+//TODO HTTPS and HTTP redirect
 
 module.exports = app;

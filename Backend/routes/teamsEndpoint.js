@@ -1,7 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose')
 
-var Boat = require('../DB/boat.js').model;
+var Team = require('../DB/team.js').model;
 var responses = require('../dataTransferObjects/responses');
 var isValidModel = require('../middlewares/isValidModel');
 var isValidObjectID = require('../middlewares/isValidObjectID');
@@ -9,14 +9,14 @@ var isValidObjectID = require('../middlewares/isValidObjectID');
 
 var router = express.Router();
 
-//Post a Boar
-router.post('/', [isValidModel(Boat)], async function (req, res) {
+//Post a Team
+router.post('/', [isValidModel(Team)], async function (req, res) {
     try {
         //Init values
-        var newBoat = new Boat(req.body);
+        var newTeam = new Team(req.body);
 
         //Insert in DB
-        newBoat.save(function (err) {
+        newTeam.save(function (err) {
             if (err) {
                 if (err.code === 11000) {
                     //duplicate key
@@ -29,7 +29,7 @@ router.post('/', [isValidModel(Boat)], async function (req, res) {
             }
             else {
                 //successfully inserted
-                res.status(201).json(responses.created(newBoat));
+                res.status(201).json(responses.created(newTeam));
             }
         });
 
@@ -42,12 +42,12 @@ router.post('/', [isValidModel(Boat)], async function (req, res) {
 //Update a device 
 router.put('/:_id', [
     isValidObjectID,
-    isValidModel(Boat)
+    isValidModel(Team)
 ], async function (req, res) {
     try {
         //Update in db
         //BUG! in JSON Passing along the object id that has cahnge break this, why even allow updae to id?
-        Boat.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true }, function (err, doc) {
+        Team.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true }, function (err, doc) {
             if (err) {
                 if (err.code === 11000) {
                     //duplicate key
@@ -75,11 +75,11 @@ router.put('/:_id', [
     }
 });
 
-//Delete a device by id 
+//Delete a Team by id 
 router.delete('/:_id', [isValidObjectID], async function (req, res) {
     try {
         //delete
-        await Boat.findOneAndDelete({ _id: req.params._id }, function (err, doc) {
+        await Team.findOneAndDelete({ _id: req.params._id }, function (err, doc) {
             if (err) {
                 //catch all clasue
                 res.status(500).json(responses.internalServerError("Database error occured", err));
@@ -104,7 +104,7 @@ router.delete('/:_id', [isValidObjectID], async function (req, res) {
 //Get by id 
 router.get('/:_id/', [isValidObjectID], async function (req, res) {
     try {
-        await Boat.findById(req.params._id, function (err, doc) {
+        await Team.findById(req.params._id, function (err, doc) {
             if (err) {
                 //catch all clasue
                 res.status(500).json(responses.internalServerError("Database error occured", err));
