@@ -19,7 +19,7 @@ var middleware =
 
         } catch (err) {
             console.log(err);
-            res.status(500).json(responses.noContent())
+            res.status(500).json(responses.internalServerError("Unexpected error occured", err))
         }
 
     };

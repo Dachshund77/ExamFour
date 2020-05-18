@@ -12,6 +12,8 @@ var cors = require('cors')
 
 //Intern files
 var coordinatesRoute = require('./routes/coordinatesEndpoint.js');
+var boatsRoute = require('./routes/boatsEndpoint.js');
+var racesRoute = require('./routes/racesEndpoint.js');
 
 // ***** //
 // Setup //
@@ -53,8 +55,11 @@ app.use(function (request, response, next) { //This is actuallya logger now that
     next();
 });
 
-//Route init 
+//Route init boatsRoute
 app.use('/coordinates', coordinatesRoute);
+app.use('/boats', boatsRoute);
+app.use('/races', racesRoute);
+
 
 //Global middleware
 //TODO REFACTOR THIS PART HERE, logging, error etc

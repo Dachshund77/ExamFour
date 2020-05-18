@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 var schema = mongoose.Schema;
 
 //https://mongoosejs.com/docs/validation.html info about validation schemas
-
+//TODO incosisten naming convention
+//TODO possible imrpove with https://docs.mongodb.com/manual/reference/geojson/#point
 let coordinateSchema =
     new schema({
         boatID: {
@@ -36,7 +37,7 @@ let coordinateSchema =
 //https://jsonapi.org/
 coordinateSchema.methods.toJSON = function () {
     return {
-        type: 'Coordinates',
+        type: 'Coordinate',
         _id: this._id,
         attributes: {
             latitude: this.latitude,
@@ -55,7 +56,7 @@ coordinateSchema.methods.toJSON = function () {
                     self: "http://localhost:3000/races/" + this.raceID
                 },
                 data: {
-                    type: 'races',
+                    type: 'race',
                     _id: this.raceID
                 },
             },
@@ -64,7 +65,7 @@ coordinateSchema.methods.toJSON = function () {
                     self: "http://localhost:3000/boats/" + this.boatID
                 },
                 data: {
-                    type: 'boats',
+                    type: 'boat',
                     _id: this.boatID
                 },
             }         
