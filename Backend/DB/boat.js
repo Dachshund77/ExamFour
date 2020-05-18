@@ -32,4 +32,5 @@ boatSchema.methods.toJSON = function () {
     }
 }
 
-module.exports = mongoose.model('boatModel', boatSchema)
+exports.schema = boatSchema;
+exports.model = mongoose.model('boatModel', boatSchema)

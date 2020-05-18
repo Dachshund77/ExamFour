@@ -1,7 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose')
 
-var Boat = require('../DB/boat.js');
+var Boat = require('../DB/boat.js').model;
 var responses = require('../dataTransferObjects/responses');
 var isValidModel = require('../middlewares/isValidModel');
 var isValidObjectID = require('../middlewares/isValidObjectID');

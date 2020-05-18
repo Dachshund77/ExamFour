@@ -29,29 +29,13 @@ let raceSchema =
                 message: 'End time may not be before stat time!'
             }
         },
-        startLatitude: {
-            type: Number,
-            default: 0,
-            min: [-90, 'StartLatitude may not be less then -90!'],
-            max: [90, 'StartLatitude may not be more then 90!']
+        startLocation: {
+            type: pointSchema,
+            required:[true, 'Location is required!']          
         },
-        endLatitude: {
-            type: Number,
-            default: 0,
-            min: [-90, 'EndLatitude may not be less then -90!'],
-            max: [90, 'EndLatitude may not be more then 90!']
-        },
-        startLongitude: {
-            type: Number,
-            default: 0,
-            min: [-180, 'StartLongitutde may not be less then -180'],
-            max: [180, 'StartLongitutde may not be more then 180']
-        },
-        endLongitude: {
-            type: Number,
-            default: 0,
-            min: [-180, 'EndLongitutde may not be less then -180'],
-            max: [180, 'EndLongitutde may not be more then 180']
+        endLocation: {
+            type: pointSchema,
+            required:[true, 'Location is required!']         
         }
     });
 
@@ -67,10 +51,8 @@ raceSchema.methods.toJSON = function () {
             raceName: this.raceName,
             startTime: this.startTime,
             endTime: this.endTime,
-            startLatitude: this.startLatitude,
-            startLongitude: this.startLongitude,
-            endLatitude: this.endLatitude,
-            endLongitude: this.endLongitude,
+            startLocation: this.startLocation,
+            endLocation: this.endLocation
         },
         links: {
             self: "http://localhost:3000/races/" + this._id,
@@ -81,4 +63,5 @@ raceSchema.methods.toJSON = function () {
     }
 }
 
-module.exports = mongoose.model('raceModel', raceSchema)
+exports.schema = raceSchema;
+exports.model = mongoose.model('raceModel', raceSchema)

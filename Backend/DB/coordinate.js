@@ -18,7 +18,7 @@ const coordinateSchema =
         },
         location: {
             type: pointSchema,
-            required: true          
+            required:[true, 'Location is required!']          
             //Kinda repeating error message on validation
         }
     },

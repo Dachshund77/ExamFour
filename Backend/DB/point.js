@@ -25,7 +25,6 @@ function longitudeValidator(val) {
 };
 
 function latitudeValidator(val) {
-    console.log(val[1])
     return (-180 <= val[1] && val[1] <= 180)
 };
 
