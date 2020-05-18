@@ -1,11 +1,11 @@
 var express = require('express');
 var mongoose = require('mongoose')
 
-var Boat = require('../models/boat.js');
+var Boat = require('../DB/boat.js');
 var responses = require('../dataTransferObjects/responses');
 var isValidModel = require('../middlewares/isValidModel');
 var isValidObjectID = require('../middlewares/isValidObjectID');
-var getRelatedCoordinates = require('../middlewares/getRelatedCoordinates');
+
 
 var router = express.Router();
 

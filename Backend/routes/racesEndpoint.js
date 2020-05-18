@@ -1,7 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose')
 
-var Race = require('../models/race.js');
+var Race = require('../DB/race.js');
 var responses = require('../dataTransferObjects/responses');
 var isValidModel = require('../middlewares/isValidModel');
 var isValidObjectID = require('../middlewares/isValidObjectID');

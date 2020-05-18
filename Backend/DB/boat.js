@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
-var schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 
 //https://mongoosejs.com/docs/validation.html info about validation schemas
 //TODO incosisten naming convention
 //TODO possible imrpove with https://docs.mongodb.com/manual/reference/geojson/#point
 let boatSchema =
-    new schema({
+    new Schema({
         boatName: {
             type: String,
             required: [true, 'Boat Name is required!']

@@ -1,11 +1,13 @@
 var mongoose = require('mongoose');
-var schema = mongoose.Schema;
+var pointSchema = require('./point').schema;
+var Schema = mongoose.Schema;
+//var raceShema = require('./race')
 
 //https://mongoosejs.com/docs/validation.html info about validation schemas
 //TODO incosisten naming convention
 //TODO possible imrpove with https://docs.mongodb.com/manual/reference/geojson/#point
-let coordinateSchema =
-    new schema({
+const coordinateSchema =
+    new Schema({
         boatID: {
             type: String,
             required: [true, 'Boat ID is required!']
@@ -14,21 +16,14 @@ let coordinateSchema =
             type: String,
             required: [true, 'Race ID is required!'] //Custom validation?
         },
-        latitude: {
-            type: Number,
-            default: 0,
-            min: [-90, 'Latitude may not be less then -90!'],
-            max: [90, 'Latitude may not be more then 90!']
-        },
-        longitude: {
-            type: Number,
-            default: 0,
-            min: [-180, 'Longitutde may not be less then -180'],
-            max: [180, 'Longitutde may not be more then 180']
+        location: {
+            type: pointSchema,
+            required: true          
+            //Kinda repeating error message on validation
         }
     },
         {
-            timestamps: { createdAt: 'create_at' }, //This will create a timestap when crated https://mongoosejs.com/docs/guide.html#
+            timestamps: { createdAt: 'createdAt' }, //This will create a timestap when crated https://mongoosejs.com/docs/guide.html#
         });
 
 /**
@@ -40,9 +35,8 @@ coordinateSchema.methods.toJSON = function () {
         type: 'Coordinate',
         _id: this._id,
         attributes: {
-            latitude: this.latitude,
-            longitude: this.longitude,
-            create_at: this.create_at
+            geoJson : this.location,      
+            createdAt: this.createdAt
         },
         links: {
             self: "http://localhost:3000/coordinates/" + this._id,
@@ -73,4 +67,5 @@ coordinateSchema.methods.toJSON = function () {
     }
 }
 
-module.exports = mongoose.model('coordinateModel', coordinateSchema)
+exports.schema = coordinateSchema;
+exports.model = mongoose.model('coordinateModel', coordinateSchema);

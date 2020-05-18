@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
-var schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 
 //https://mongoosejs.com/docs/validation.html info about validation schemas
 //TODO FIX incosisten naming convention
 let raceSchema =
-    new schema({
+    new Schema({
         raceName: {
             type: String,
             required: [true, 'Race must have a name!']

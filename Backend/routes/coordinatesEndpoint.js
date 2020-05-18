@@ -1,7 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose')
 
-var Coordinate = require('../models/coordinate.js');
+var Coordinate = require('../DB/coordinate.js').model;
 var responses = require('../dataTransferObjects/responses');
 var isValidModel = require('../middlewares/isValidModel');
 var isValidObjectID = require('../middlewares/isValidObjectID');
