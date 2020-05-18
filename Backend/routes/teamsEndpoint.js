@@ -82,7 +82,7 @@ router.put('/:_id', [
 router.delete('/:_id', [isValidObjectID], async function (req, res) {
     try {
         //delete
-        await Team.findOneAndDelete({ _id: req.params._id }, function (err, doc) {
+        await Team.findOneAndRemove({ _id: req.params._id }, function (err, doc) {
             if (err) {
                 if (err instanceof mongoose.Error.ValidationError) {
                     res.status(400).json(responses.badRequest("Validation failed for request", err));

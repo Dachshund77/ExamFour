@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var pointSchema = require('./point').schema;
+//var coordinateModel = require('./coordinate').model
 
 //https://mongoosejs.com/docs/validation.html info about validation schemas
 //TODO FIX incosisten naming convention
@@ -32,13 +33,26 @@ let raceSchema =
         },
         startLocation: {
             type: pointSchema,
-            required:[true, 'Location is required!']          
+            required: [true, 'Location is required!']
         },
         endLocation: {
             type: pointSchema,
-            required:[true, 'Location is required!']         
+            required: [true, 'Location is required!']
         }
     });
+
+raceSchema.pre(['remove','findOneAndRemove'], function (next) {
+    console.log('findOneAndRemove in race')
+    let Race = this;
+    console.log('---------------------------------------------------------------')
+    console.log(Race);
+    console.log('---------------------------------------------------------------')
+
+    next();
+});
+
+
+
 
 /**
  * Overwriting for custom JSON responses
@@ -60,7 +74,7 @@ raceSchema.methods.toJSON = function () {
         },
         meta: {
             dbVersion: this.__v
-        }       
+        }
     }
 }
 

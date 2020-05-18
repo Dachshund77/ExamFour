@@ -14,7 +14,7 @@ router.post('/', async function (req, res) {
         var newRace = new Race(req.body);
 
         //Insert in DB
-        newCord.save(function (err) {
+        newRace.save(function (err) {
             if (err) {
                 if (err.code === 11000) {
                     //duplicate key
@@ -83,7 +83,7 @@ router.put('/:_id', [
 router.delete('/:_id', [isValidObjectID], async function (req, res) {
     try {
         //delete
-        await Race.findOneAndDelete({ _id: req.params._id }, function (err, doc) {
+        await Race.findOneAndRemove({ _id: req.params._id }, function (err, doc) {
             if (err) {
                 if (err instanceof mongoose.Error.ValidationError) {
                     res.status(400).json(responses.badRequest("Validation failed for request", err));

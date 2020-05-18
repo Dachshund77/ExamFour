@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var pointSchema = require('./point').schema;
 var Schema = mongoose.Schema;
 var raceModel = require('./race').model
-var teamModel = require('./team').model
+//var teamModel = require('./team').model //CIRCULAR DEPENDENCY
 
 //https://mongoosejs.com/docs/validation.html info about validation schemas
 //TODO incosisten naming convention
@@ -13,17 +13,17 @@ const coordinateSchema =
             type: Schema.Types.ObjectId,
             ref: "teamModel",
             required: [true, 'Team ID is required!'],
-            validate: [
-                { validator: teamRecordExists, msg: 'Team does not exist' }
-            ]
+            //validate: [
+                //{ validator: teamRecordExists, msg: 'Team does not exist' }
+            //]
         },
         raceID: {
             type: Schema.Types.ObjectId,
             ref: "raceModel",
             required: [true, 'Race ID is required!'],
-            validate: [
-                { validator: raceRecordExists, msg: 'Race does not exist'}
-            ]
+            //validate: [
+                //{ validator: raceRecordExists, msg: 'Race does not exist' }
+            //]
         },
         location: {
             type: pointSchema,
@@ -49,21 +49,20 @@ async function raceRecordExists(val) {
 
 coordinateSchema.pre(['save', 'insertMany', 'update', 'updateOne', 'findOneAndUpdate', 'updateMany'], function (next) {
     //Test if race ist actually existing
-    raceModel.find()
-
+    
+    console.log(this) //Thats actually a model here
     //Test if team is actually existing
 
     next()
 });
 
-coordinateSchema.pre('insertMany', function (next) {
-    const err = new mongoose.Error('something went wrong');
-    //err.test = new Error('something went SUPER wrong');
-    //err.code = 11000;
-    //console.log(err);
-    //JSON.stringify(err);
-    //next(err);
-    console.log('find')
+coordinateSchema.pre('findOneAndRemove', function (next) {
+    console.log('findOneAndRemove in coordinate')
+    next();
+});
+
+coordinateSchema.pre('remove', function (next) {
+    console.log('remove in coordinate')
     next();
 });
 

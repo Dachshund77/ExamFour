@@ -78,11 +78,13 @@ router.put('/:_id',
 
 //Delete a device by id 
 router.delete('/:_id', [isValidObjectID], async function (req, res) {
+    console.log('TEST2')
     try {
         //delete
-        await Coordinate.findOneAndDelete({ _id: req.params._id }, function (err, doc) {
+        await Coordinate.findOneAndRemove({ _id: req.params._id }, function (err, doc) {
             if (err) {
                 if (err instanceof mongoose.Error.ValidationError) {
+                    console.log('TEST1')
                     res.status(400).json(responses.badRequest("Validation failed for request", err));
                 } else {
                     //catch all clasue
@@ -92,6 +94,7 @@ router.delete('/:_id', [isValidObjectID], async function (req, res) {
             else {
                 if (doc == null) {
                     //Could not find ressource
+                    console.log('TEST3')
                     res.status(404).json(responses.notFound("Ressource was not found for " + req.params._id));
                 } else {
                     //respond on succes //204
