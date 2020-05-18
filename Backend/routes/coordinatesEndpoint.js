@@ -3,13 +3,12 @@ var mongoose = require('mongoose')
 
 var Coordinate = require('../DB/coordinate.js').model;
 var responses = require('../dataTransferObjects/responses');
-var isValidModel = require('../middlewares/isValidModel');
 var isValidObjectID = require('../middlewares/isValidObjectID');
 
 var router = express.Router();
 
 //Post a Coordinate
-router.post('/', [isValidModel(Coordinate)], async function (req, res) {
+router.post('/', async function (req, res) {
     try {
         //Init values
         var newCord = new Coordinate(req.body);
@@ -21,12 +20,10 @@ router.post('/', [isValidModel(Coordinate)], async function (req, res) {
                     //duplicate key
                     res.status(400).json(responses.badRequest("Key exists already in database", err));
                 } else if (err instanceof mongoose.Error.ValidationError) {
-                    res.status(400).json(responses.badRequest("Request failed", err));
+                    res.status(400).json(responses.badRequest("Validation failed for request", err));
                 }
-                else if (err) { //need other error
+                else { //need other error
                     //catch all clasue
-                    console.log(err)
-                    console.log('wtf')
                     res.status(500).json(responses.internalServerError("Database error occured", err));
                 }
             }
@@ -45,8 +42,7 @@ router.post('/', [isValidModel(Coordinate)], async function (req, res) {
 //Update a device 
 router.put('/:_id',
     [
-        isValidObjectID,
-        isValidModel(Coordinate)
+        isValidObjectID
     ],
     async function (req, res) {
         try {
@@ -86,8 +82,12 @@ router.delete('/:_id', [isValidObjectID], async function (req, res) {
         //delete
         await Coordinate.findOneAndDelete({ _id: req.params._id }, function (err, doc) {
             if (err) {
-                //catch all clasue
-                res.status(500).json(responses.internalServerError("Database error occured", err));
+                if (err instanceof mongoose.Error.ValidationError) {
+                    res.status(400).json(responses.badRequest("Validation failed for request", err));
+                } else {
+                    //catch all clasue
+                    res.status(500).json(responses.internalServerError("Database error occured", err));
+                }
             }
             else {
                 if (doc == null) {
@@ -112,8 +112,12 @@ router.get('/:_id', [isValidObjectID], async function (req, res) {
         //delete
         await Coordinate.findById(req.params._id, function (err, doc) {
             if (err) {
-                //catch all clasue
-                res.status(500).json(responses.internalServerError("Database error occured", err));
+                if (err instanceof mongoose.Error.ValidationError) {
+                    res.status(400).json(responses.badRequest("Validation failed for request", err));
+                } else {
+                    //catch all clasue
+                    res.status(500).json(responses.internalServerError("Database error occured", err));
+                }
             }
             else {
                 if (doc == null) {

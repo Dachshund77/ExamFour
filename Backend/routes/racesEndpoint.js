@@ -3,13 +3,12 @@ var mongoose = require('mongoose')
 
 var Race = require('../DB/race.js').model;
 var responses = require('../dataTransferObjects/responses');
-var isValidModel = require('../middlewares/isValidModel');
 var isValidObjectID = require('../middlewares/isValidObjectID');
 
 var router = express.Router();
 
 //Post a race
-router.post('/', [isValidModel(Race)], async function (req, res) {
+router.post('/', async function (req, res) {
     try {
         //Init values
         var newRace = new Race(req.body);
@@ -21,7 +20,10 @@ router.post('/', [isValidModel(Race)], async function (req, res) {
                     //duplicate key
                     res.status(400).json(responses.badRequest("Key exists already in database", err));
                 }
-                else if (err) { //need other error
+                else if (err instanceof mongoose.Error.ValidationError) {
+                    res.status(400).json(responses.badRequest("Validation failed for request", err));
+                }
+                else { //need other error
                     //catch all clasue
                     res.status(500).json(responses.internalServerError("Database error occured", err));
                 }
@@ -40,8 +42,7 @@ router.post('/', [isValidModel(Race)], async function (req, res) {
 
 //Update a Race 
 router.put('/:_id', [
-    isValidObjectID,
-    isValidModel(Race)
+    isValidObjectID
 ], async function (req, res) {
     try {
         //Update in db
@@ -50,11 +51,14 @@ router.put('/:_id', [
             if (err) {
                 if (err.code === 11000) {
                     //duplicate key
-                    res.status(400).json(responses.badRequest("Key exists already in database", dbError));
+                    res.status(400).json(responses.badRequest("Key exists already in database", err));
                 }
-                else if (err) { //need other error
+                else if (err instanceof mongoose.Error.ValidationError) {
+                    res.status(400).json(responses.badRequest("Validation failed for request", err));
+                }
+                else { //need other error
                     //catch all clasue
-                    res.status(500).json(responses.internalServerError("Database error occured", dbError));
+                    res.status(500).json(responses.internalServerError("Database error occured", err));
                 }
             } else {
                 if (doc == null) {
@@ -81,8 +85,13 @@ router.delete('/:_id', [isValidObjectID], async function (req, res) {
         //delete
         await Race.findOneAndDelete({ _id: req.params._id }, function (err, doc) {
             if (err) {
-                //catch all clasue
-                res.status(500).json(responses.internalServerError("Database error occured", err));
+                if (err instanceof mongoose.Error.ValidationError) {
+                    res.status(400).json(responses.badRequest("Validation failed for request", err));
+                }
+                else {
+                    //catch all clasue
+                    res.status(500).json(responses.internalServerError("Database error occured", err));
+                }
             }
             else {
                 if (doc == null) {
@@ -107,8 +116,13 @@ router.get('/:_id', [isValidObjectID], async function (req, res) {
         //delete
         await Race.findById(req.params._id, function (err, doc) {
             if (err) {
-                //catch all clasue
-                res.status(500).json(responses.internalServerError("Database error occured", err));
+                if (err instanceof mongoose.Error.ValidationError) {
+                    res.status(400).json(responses.badRequest("Validation failed for request", err));
+                }
+                else {
+                    //catch all clasue
+                    res.status(500).json(responses.internalServerError("Database error occured", err));
+                }
             }
             else {
                 if (doc == null) {
