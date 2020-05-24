@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 
-const routes: Routes = [{ path: 'core', loadChildren: () => import('./core/core.module').then(m => m.CoreModule) }, { path: 'shared', loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule) }];
+const routes: Routes = [
+  { path: 'core', loadChildren: () => import('./core/core.module').then(m => m.CoreModule) },
+  { path: 'shared', loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule) }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
