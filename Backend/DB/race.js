@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var pointSchema = require('./point').schema;
-//var coordinateModel = require('./coordinate').model
 
 //https://mongoosejs.com/docs/validation.html info about validation schemas
 //TODO FIX incosisten naming convention
@@ -28,30 +27,30 @@ let raceSchema =
                         return true;
                     }
                 },
-                message: 'End time may not be before stat time!'
+                message: 'End time may not be before start time!'
             }
         },
         startLocation: {
             type: pointSchema,
-            required: [true, 'Location is required!']
+            required: [true, 'Start Location is required!']
         },
         endLocation: {
             type: pointSchema,
-            required: [true, 'Location is required!']
+            required: [true, 'End Location is required!']
         }
     });
 
-raceSchema.pre(['remove','findOneAndRemove'], function (next) {
-    console.log('findOneAndRemove in race')
-    let Race = this;
-    console.log('---------------------------------------------------------------')
-    console.log(Race);
-    console.log('---------------------------------------------------------------')
+raceSchema.post(['remove', 'findOneAndRemove', 'deleteMany', 'deleteOne'],  async function (doc) {
+    //init   
+    //console.log(doc) //We could in theory fuck with the doc
+    //doc.test = 'sss'
+    let coordinateModel = mongoose.model('coordinateModel')
+    let removeID = this._conditions._id; //The called paramter in the url
+    
+    //Removing coordiantes that are realted
+    await coordinateModel.deleteMany({ raceID: removeID });
 
-    next();
 });
-
-
 
 
 /**

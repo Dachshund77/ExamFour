@@ -83,7 +83,7 @@ router.put('/:_id', [
 router.delete('/:_id', [isValidObjectID], async function (req, res) {
     try {
         //delete
-        await Race.findOneAndRemove({ _id: req.params._id }, function (err, doc) {
+        await Race.deleteOne({ _id: req.params._id }, function (err, doc) {
             if (err) {
                 if (err instanceof mongoose.Error.ValidationError) {
                     res.status(400).json(responses.badRequest("Validation failed for request", err));
@@ -94,12 +94,12 @@ router.delete('/:_id', [isValidObjectID], async function (req, res) {
                 }
             }
             else {
-                if (doc == null) {
+                if (doc.n == 0) {
                     //Could not find ressource
                     res.status(404).json(responses.notFound("Ressource was not found for " + req.params._id));
                 } else {
                     //respond on succes //204
-                    res.status(200).json(responses.ok(doc));
+                    res.status(204).json(responses.noContent());
                 }
             }
         });

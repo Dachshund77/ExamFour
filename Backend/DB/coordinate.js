@@ -1,8 +1,7 @@
 var mongoose = require('mongoose');
 var pointSchema = require('./point').schema;
 var Schema = mongoose.Schema;
-var raceModel = require('./race').model
-//var teamModel = require('./team').model //CIRCULAR DEPENDENCY
+
 
 //https://mongoosejs.com/docs/validation.html info about validation schemas
 //TODO incosisten naming convention
@@ -14,7 +13,7 @@ const coordinateSchema =
             ref: "teamModel",
             required: [true, 'Team ID is required!'],
             //validate: [
-                //{ validator: teamRecordExists, msg: 'Team does not exist' }
+            //   { validator: teamRecordExists, msg: 'Team does not exist' }
             //]
         },
         raceID: {
@@ -22,7 +21,7 @@ const coordinateSchema =
             ref: "raceModel",
             required: [true, 'Race ID is required!'],
             //validate: [
-                //{ validator: raceRecordExists, msg: 'Race does not exist' }
+            //{ validator: raceRecordExists, msg: 'Race does not exist' }
             //]
         },
         location: {
@@ -36,34 +35,37 @@ const coordinateSchema =
         });
 
 async function teamRecordExists(val) { //Well technical this failing should lead to a 400 bad request not 500.
-    let result = null;
-    result = await teamModel.exists({ _id: val });
-    return result;
+    try {
+        //Init values
+        let result = null;
+        let teamModel = mongoose.model('teamModel'); //Avoiding circular dependecy
+        result = await teamModel.exists({ _id: val });
+        return result;
+    } catch (error) {
+        throw new mongoose.Error(error)
+    }
 }
 
 async function raceRecordExists(val) {
-    let result = null;
-    result = await raceModel.exists({ _id: val });
-    return result;
+    try {
+        let result = null;
+        let raceModel = mongoose.model('raceModel'); //Avoiding circular dependecy
+        result = await raceModel.exists({ _id: val });
+        return result;
+    } catch (error) {
+        throw new mongoose.Error(error)
+    }
 }
 
-coordinateSchema.pre(['save', 'insertMany', 'update', 'updateOne', 'findOneAndUpdate', 'updateMany'], function (next) {
-    //Test if race ist actually existing
-    
-    console.log(this) //Thats actually a model here
-    //Test if team is actually existing
 
-    next()
-});
-
-coordinateSchema.pre('findOneAndRemove', function (next) {
-    console.log('findOneAndRemove in coordinate')
-    next();
-});
-
-coordinateSchema.pre('remove', function (next) {
-    console.log('remove in coordinate')
-    next();
+coordinateSchema.pre(['update', 'findOneAndUpdate'], async function (next) {
+    try {
+        //console.log(this.increment())
+        this.update({}, { $inc: { __v: 1 } })
+        next()
+    } catch (error) {
+        throw new mongoose.Error(error)
+    }
 });
 
 /**

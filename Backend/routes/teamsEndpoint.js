@@ -20,20 +20,27 @@ router.post('/', async function (req, res) {
                 if (err.code === 11000) {
                     //duplicate key
                     res.status(400).json(responses.badRequest("Key exists already in database", err));
+                    return
                 }
                 if (err instanceof mongoose.Error.ValidationError) {
+
                     res.status(400).json(responses.badRequest("Validation failed for request", err));
+                    return
                 }
                 else { //need other error
                     //catch all clasue
                     res.status(500).json(responses.internalServerError("Database error occured", err));
+                    return
                 }
             }
             else {
-                //successfully inserted
+                //successfully inserted               
                 res.status(201).json(responses.created(newTeam));
             }
         });
+        console.log(newTeam)
+        console.log('ID')
+        console.log(newTeam.id)
 
     } catch (err) {
         console.log(err);
@@ -52,22 +59,27 @@ router.put('/:_id', [
             if (err) {
                 if (err.code === 11000) {
                     //duplicate key
-                    res.status(400).json(responses.badRequest("Key exists already in database", dbError));
+                    res.status(400).json(responses.badRequest("Key exists already in database", err));
+                    return
                 } if (err instanceof mongoose.Error.ValidationError) {
                     res.status(400).json(responses.badRequest("Validation failed for request", err));
+                    return
                 }
                 else { //need other error
                     //catch all clasue
-                    res.status(500).json(responses.internalServerError("Database error occured", dbError));
+                    res.status(500).json(responses.internalServerError("Database error occured", err));
+                    return
                 }
             } else {
                 if (doc == null) {
                     //Could not find ressource
                     res.status(404).json(responses.notFound("Ressource was not found for " + req.params._id));
+                    return
                 }
                 else {
                     //respond on succes
                     res.status(200).json(responses.ok(doc));
+                    return
                 }
             }
         });
@@ -82,24 +94,25 @@ router.put('/:_id', [
 router.delete('/:_id', [isValidObjectID], async function (req, res) {
     try {
         //delete
-        await Team.findOneAndRemove({ _id: req.params._id }, function (err, doc) {
+        await Team.deleteOne({ _id: req.params._id }, function (err, doc) {
             if (err) {
                 if (err instanceof mongoose.Error.ValidationError) {
                     res.status(400).json(responses.badRequest("Validation failed for request", err));
+                    return
                 }
                 else {
                     //catch all clasue
                     res.status(500).json(responses.internalServerError("Database error occured", err));
+                    return
                 }
-
             }
             else {
-                if (doc == null) {
+                if (doc.n == 0) { //Not maatched with anything
                     //Could not find ressource
                     res.status(404).json(responses.notFound("Ressource was not found for " + req.params._id));
                 } else {
                     //respond on succes //204
-                    res.status(200).json(responses.ok(doc));
+                    res.status(200).json(responses.noContent());
                 }
             }
         });
@@ -111,29 +124,48 @@ router.delete('/:_id', [isValidObjectID], async function (req, res) {
 });
 
 //Get by id 
-router.get('/:_id/', [isValidObjectID], async function (req, res) {
+router.get('/:_id/:outdated?', [isValidObjectID], async function (req, res) {
     try {
-        await Team.findById(req.params._id, function (err, doc) {
+        //AN OBJECT ID IS ALWAYS 24 CHARS
+
+        console.log(req.query.outdated);
+        //'_id.internal': req.params._id
+        await Team.findOne({ '_id.internal': req.params._id, '_id.outdated': req.query.outdated }, function (err, doc) {
             if (err) {
                 if (err instanceof mongoose.Error.ValidationError) {
                     res.status(400).json(responses.badRequest("Validation failed for request", err));
+                    return
                 }
                 else {
                     //catch all clasue
                     res.status(500).json(responses.internalServerError("Database error occured", err));
+                    return
                 }
-
             }
             else {
                 if (doc == null) {
                     //Could not find ressource
-                    res.status(404).json(responses.notFound("Ressource was not found for " + req.params._id));
+                    res.status(404).json(responses.notFound("Ressource was not found"));
+                    return
                 } else {
                     //respond on succes //200 
-                    res.status(200).json(test);
+                    res.status(200).json(responses.ok(doc));
+                    return
                 }
             }
         });
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json(responses.internalServerError("Unexpected error occured", err))
+    }
+});
+
+//Get by filer 
+router.get('/:filter?', async function (req, res) {
+    try {
+        console.log('GET BY FILTER')
+        res.end();
     }
     catch (err) {
         console.log(err);

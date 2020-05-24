@@ -19,17 +19,21 @@ router.post('/', async function (req, res) {
                 if (err.code === 11000) {
                     //duplicate key
                     res.status(400).json(responses.badRequest("Key exists already in database", err));
+                    return
                 } else if (err instanceof mongoose.Error.ValidationError) {
                     res.status(400).json(responses.badRequest("Validation failed for request", err));
+                    return
                 }
                 else { //need other error
                     //catch all clasue
                     res.status(500).json(responses.internalServerError("Database error occured", err));
+                    return
                 }
             }
             else {
                 //successfully inserted
                 res.status(201).json(responses.created(newCord));
+                return
             }
         });
 
@@ -52,20 +56,24 @@ router.put('/:_id',
                 if (err) {
                     if (err.code === 11000) {
                         //duplicate key
-                        res.status(400).json(responses.badRequest("Key exists already in database", dbError));
+                        res.status(400).json(responses.badRequest("Key exists already in database", err));
+                        return
                     }
                     else if (err) { //need other error
                         //catch all clasue
-                        res.status(500).json(responses.internalServerError("Database error occured", dbError));
+                        res.status(500).json(responses.internalServerError("Database error occured", err));
+                        return
                     }
                 } else {
                     if (doc == null) {
                         //Could not find ressource
                         res.status(404).json(responses.notFound("Ressource was not found for " + req.params._id));
+                        return
                     }
                     else {
                         //respond on succes
                         res.status(200).json(responses.ok(doc));
+                        return
                     }
                 }
             });
@@ -81,24 +89,26 @@ router.delete('/:_id', [isValidObjectID], async function (req, res) {
     console.log('TEST2')
     try {
         //delete
-        await Coordinate.findOneAndRemove({ _id: req.params._id }, function (err, doc) {
+        await Coordinate.deleteOne({ _id: req.params._id }, function (err, doc) {
             if (err) {
                 if (err instanceof mongoose.Error.ValidationError) {
-                    console.log('TEST1')
                     res.status(400).json(responses.badRequest("Validation failed for request", err));
+                    return
                 } else {
                     //catch all clasue
                     res.status(500).json(responses.internalServerError("Database error occured", err));
+                    return
                 }
             }
             else {
-                if (doc == null) {
+                if (doc.n == 0) {
                     //Could not find ressource
-                    console.log('TEST3')
                     res.status(404).json(responses.notFound("Ressource was not found for " + req.params._id));
+                    return
                 } else {
                     //respond on succes //204
-                    res.status(200).json(responses.ok(doc));
+                    res.status(204).json(responses.noContent());
+                    return
                 }
             }
         });
@@ -117,18 +127,22 @@ router.get('/:_id', [isValidObjectID], async function (req, res) {
             if (err) {
                 if (err instanceof mongoose.Error.ValidationError) {
                     res.status(400).json(responses.badRequest("Validation failed for request", err));
+                    return
                 } else {
                     //catch all clasue
                     res.status(500).json(responses.internalServerError("Database error occured", err));
+                    return
                 }
             }
             else {
                 if (doc == null) {
                     //Could not find ressource
                     res.status(404).json(responses.notFound("Ressource was not found for " + req.params._id));
+                    return
                 } else {
                     //respond on succes //200
                     res.status(200).json(responses.ok(doc));
+                    return
                 }
             }
         });
