@@ -27,7 +27,8 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": [             
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.js",
               "./node_modules/bootstrap/dist/js/bootstrap.js"
             ]
           },
@@ -59,7 +60,24 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ]          
+            },
+            "de": {
+              "aot": true,
+              "outputPath": "dist/de/",
+              "i18nFile": "src/locale/messages.de.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "de",
+              "baseHref": "/de/"                           
+            },
+            "da": {
+              "aot": true,
+              "outputPath": "dist/da/",
+              "i18nFile": "src/locale/messages.da.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "da",
+              "baseHref": "/da/"
+              
             }
           }
         },
@@ -71,6 +89,12 @@
           "configurations": {
             "production": {
               "browserTarget": "Website:build:production"
+            },
+            "de": {
+              "browserTarget": "Website:build:de"
+            },
+            "da": {
+              "browserTarget": "Website:build:da"
             }
           }
         },
