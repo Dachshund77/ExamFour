@@ -5,10 +5,15 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   { path: 'core', loadChildren: () => import('./core/core.module').then(m => m.CoreModule) },
   { path: 'shared', loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule) }
+
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+  goTest(){
+    window.location.href='http://www.cnn.com/';
+  }
+ }

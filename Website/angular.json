@@ -60,24 +60,32 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]          
+              ]
             },
             "de": {
               "aot": true,
-              "outputPath": "dist/de/",
-              "i18nFile": "src/locale/messages.de.xlf",
+              "outputPath": "dist/de",
+              "i18nFile": "src/i18n/messages.de.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "de",
-              "baseHref": "/de/"                           
+              "baseHref": "/de/"
             },
             "da": {
               "aot": true,
-              "outputPath": "dist/da/",
-              "i18nFile": "src/locale/messages.da.xlf",
+              "outputPath": "dist/da",
+              "i18nFile": "src/i18n/messages.da.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "da",
-              "baseHref": "/da/"
-              
+              "baseHref": "/da/"              
+          
+            },
+            "en": {
+              "aot": true,
+              "outputPath": "dist/en",
+              "i18nFile": "src/i18n/messages.en.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "en",
+              "baseHref": "/en/"
             }
           }
         },
@@ -95,6 +103,9 @@
             },
             "da": {
               "browserTarget": "Website:build:da"
+            },
+            "en": {
+              "browserTarget": "Website:build:en"
             }
           }
         },
@@ -143,6 +154,22 @@
           "configurations": {
             "production": {
               "devServerTarget": "Website:serve:production"
+            }
+          }
+        },
+        "xliffmerge": {
+          "builder": "@ngx-i18nsupport/tooling:xliffmerge",
+          "options": {
+            "xliffmergeOptions": {
+              "i18nFormat": "xlf",
+              "srcDir": "src/i18n",
+              "genDir": "src/i18n",
+              "defaultLanguage": "en",
+              "languages": [
+                "en",
+                "da",
+                "de"
+              ]
             }
           }
         }

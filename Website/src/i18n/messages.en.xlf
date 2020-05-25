@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template" target-language="en">
+    <body>
+      <trans-unit id="15de6192503ed62213e93d1207e89b5cfbae12da" datatype="html">
+        <source>Hello i18n!</source><target state="final">Hello i18n!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <note priority="1" from="description">A tranalation test</note>
+        <note priority="1" from="meaning">Site test</note>
+      </trans-unit>
+      <trans-unit id="8654eed671531cd468302ba88029323f2ae0d22c" datatype="html">
+        <source>once again hello!</source><target state="final">once again hello!</target>
+        
+        <note priority="1" from="description">secondary text stuff</note>
+        <note priority="1" from="meaning">Site test</note>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/app.component.html</context><context context-type="linenumber">6</context></context-group></trans-unit><trans-unit id="38b9a4ce287453d5d2d909e941b56586d4941a33" datatype="html">
+        <source>lol again hello!</source><target state="final">lol again hello!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <note priority="1" from="description">third text stuff</note>
+        <note priority="1" from="meaning">Interisting stuff</note>
+      </trans-unit>
+      <trans-unit id="d7aecd6bf9eb31ae5d04c6446bee69ac8bfc9e97" datatype="html">
+        <source>core works!</source><target state="final">core works!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/core.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
