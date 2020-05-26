@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CoreRoutingModule } from './core-routing.module';
-import { CoreComponent } from './core.component';
+import { MenuBarComponent } from './header/menu-bar/menu-bar.component';
 
 
 @NgModule({
-  declarations: [CoreComponent],
+  declarations: [
+    MenuBarComponent],
   imports: [
-    CommonModule,
-    CoreRoutingModule
+    CommonModule
+  ],
+  exports:[
+    MenuBarComponent
   ]
 })
 export class CoreModule { }

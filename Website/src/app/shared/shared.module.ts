@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ContactBarComponent } from './components/contact-bar/contact-bar.component';
 
-import { SharedRoutingModule } from './shared-routing.module';
-import { SharedComponent } from './shared.component';
-
-
+//I think this need to be yeeted at some point
 @NgModule({
-  declarations: [SharedComponent],
+  declarations: [
+    ContactBarComponent
+  ],
   imports: [
-    CommonModule,
-    SharedRoutingModule
-  ]
+    CommonModule
+  ],
+  exports: [ContactBarComponent]
 })
 export class SharedModule { }

@@ -1,13 +1,68 @@
-/* This should follow BEM principles */
+/* This should follow BEM principles 
+a-blockName_elementName--modiferName
+*/
 
-.btn--primary {
-    background-color: red;
+.app-btn--primary {
+    border-radius: 0px;
+    border: 4px solid black;
+    background-color: rgb(236, 255, 251);
 }
 
-.btn--secondary  {
+.app-btn--secondary {
     background-color: blue;
 }
 
-.btn--tertiary{
+.app-btn--tertiary {
     background-color: green;
+}
+
+.app-bg--primary {
+    background-color: rgb(59, 59, 253);
+}
+
+.app-bg--secondary {
+    padding: 0.5%;
+    background-color: rgb(161, 219, 216);
+}
+
+.app-bg--tertiary {
+    background-color: rgb(168, 168, 168);
+}
+
+.app-container--primary {
+    padding: 0.5%;
+    /*border: 1px solid black;*/
+}
+
+.app-container--secondary {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+
+.app-container--tertiary {
+    border: 1px solid purple;
+}
+
+.app-txt--primary {
+    color: black;
+    background-color: coral;
+}
+
+.app-txt--secondary {
+    color: black;
+    background-color: coral;
+}
+
+.app-txt--tertiary {
+    color: black;
+    background-color: coral;
+}
+
+.app-sideDiv--left {
+    min-width: 15%;
+}
+
+.app-sideDiv--right {
+    min-width: 15%;
 }
