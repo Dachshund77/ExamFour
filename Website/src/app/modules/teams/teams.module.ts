@@ -6,14 +6,18 @@ import { CreateTeamPageComponent } from './pages/create-team-page/create-team-pa
 import { ManageTeamPageComponent } from './pages/manage-team-page/manage-team-page.component';
 import { SearchTeamPageComponent } from './pages/search-team-page/search-team-page.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreateTeamFormComponent } from './components/create-team-form/create-team-form.component';
 
 
 @NgModule({
-  declarations: [CreateTeamPageComponent, ManageTeamPageComponent, SearchTeamPageComponent],
+  declarations: [CreateTeamPageComponent, ManageTeamPageComponent, SearchTeamPageComponent, CreateTeamFormComponent],
   imports: [
     CommonModule,
     TeamsRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class TeamsModule { }

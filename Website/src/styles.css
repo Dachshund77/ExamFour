@@ -9,7 +9,7 @@ a-blockName_elementName--modiferName
 }
 
 .app-btn--secondary {
-    background-color: blue;
+    background-color: rgb(151, 151, 255);
 }
 
 .app-btn--tertiary {
@@ -51,7 +51,6 @@ a-blockName_elementName--modiferName
 
 .app-txt--secondary {
     color: black;
-    background-color: coral;
 }
 
 .app-txt--tertiary {
@@ -66,3 +65,9 @@ a-blockName_elementName--modiferName
 .app-sideDiv--right {
     min-width: 15%;
 }
+
+.app-formGroup--primary {}
+
+.app-formGroup--secondary {}
+
+.app-formGroup--tertiary {}

@@ -2,36 +2,105 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template" target-language="en">
     <body>
-      <trans-unit id="15de6192503ed62213e93d1207e89b5cfbae12da" datatype="html">
-        <source>Hello i18n!</source><target state="final">Hello i18n!</target>
+      <trans-unit id="0fd6f6b4d0afb07e5eb38fc06f92459f67f12805" datatype="html">
+        <source>Races</source><target state="final">Races</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="sourcefile">src/app/core/header/menu-bar/menu-bar.component.html</context>
+          <context context-type="linenumber">5</context>
         </context-group>
-        <note priority="1" from="description">A tranalation test</note>
-        <note priority="1" from="meaning">Site test</note>
-      </trans-unit>
-      <trans-unit id="8654eed671531cd468302ba88029323f2ae0d22c" datatype="html">
-        <source>once again hello!</source><target state="final">once again hello!</target>
-        
-        <note priority="1" from="description">secondary text stuff</note>
-        <note priority="1" from="meaning">Site test</note>
-      <context-group purpose="location"><context context-type="sourcefile">src/app/app.component.html</context><context context-type="linenumber">6</context></context-group></trans-unit><trans-unit id="38b9a4ce287453d5d2d909e941b56586d4941a33" datatype="html">
-        <source>lol again hello!</source><target state="final">lol again hello!</target>
+        <note priority="1" from="description"> Menu headder that expands on hover shoving at the top of the app</note>
+        <note priority="1" from="meaning">Menu header </note>
+      </trans-unit><trans-unit id="2750833695e9b2509a7d5cb2671da8f0eb0d084c" datatype="html">
+        <source>Create new race</source><target state="final">Create new race</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="sourcefile">src/app/core/header/menu-bar/menu-bar.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <note priority="1" from="description">third text stuff</note>
-        <note priority="1" from="meaning">Interisting stuff</note>
-      </trans-unit>
-      <trans-unit id="d7aecd6bf9eb31ae5d04c6446bee69ac8bfc9e97" datatype="html">
-        <source>core works!</source><target state="final">core works!</target>
+        <note priority="1" from="description"> Menu item link that leads to another page</note>
+        <note priority="1" from="meaning">Menu item </note>
+      </trans-unit><trans-unit id="decb7216ad339124f0aa3063ac968d22dcb92032" datatype="html">
+        <source>Manage your races</source><target state="final">Manage your races</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/core/core.component.html</context>
-          <context context-type="linenumber">1</context>
+          <context context-type="sourcefile">src/app/core/header/menu-bar/menu-bar.component.html</context>
+          <context context-type="linenumber">8</context>
         </context-group>
+        <note priority="1" from="description"> Menu item link that leads to another page</note>
+        <note priority="1" from="meaning">Menu item </note>
+      </trans-unit><trans-unit id="69403fd70e429fcc6204f5a8f66da529e2ee89b2" datatype="html">
+        <source>Find races</source><target state="final">Find races</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/header/menu-bar/menu-bar.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <note priority="1" from="description"> Menu item link that leads to another page</note>
+        <note priority="1" from="meaning">Menu item </note>
+      </trans-unit><trans-unit id="27079d7bfca5574be6f6b2e696f304d7e066b0ed" datatype="html">
+        <source>Teams</source><target state="final">Teams</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/header/menu-bar/menu-bar.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <note priority="1" from="description"> Menu headder that expands on hover shoving at the top of the app</note>
+        <note priority="1" from="meaning">Menu header </note>
+      </trans-unit><trans-unit id="1dddec9a77877c93dd86ee056888aaf47c52900f" datatype="html">
+        <source>Create new team</source><target state="final">Create new team</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/header/menu-bar/menu-bar.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <note priority="1" from="description"> Menu item link that leads to another page</note>
+        <note priority="1" from="meaning">Menu item </note>
+      </trans-unit><trans-unit id="f00a45a9441985450c07fd9baf97172c786e3db3" datatype="html">
+        <source>Manage your teams </source><target state="final">Manage your teams </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/header/menu-bar/menu-bar.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <note priority="1" from="description"> Menu item link that leads to another page</note>
+        <note priority="1" from="meaning">Menu item </note>
+      </trans-unit><trans-unit id="1e73dfc6d2ab82a80b6b06b663c4ea323fc11efb" datatype="html">
+        <source>Find team</source><target state="final">Find team</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/header/menu-bar/menu-bar.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <note priority="1" from="description"> Menu item link that leads to another page</note>
+        <note priority="1" from="meaning">Menu item </note>
+      </trans-unit><trans-unit id="fb51e5e15d7377044e300d45bc1eac6fe73e4881" datatype="html">
+        <source>Create new Team</source><target state="final">Create new Team</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/teams/pages/create-team-page/create-team-page.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description"> Title for the page</note>
+        <note priority="1" from="meaning">Title </note>
+      </trans-unit><trans-unit id="db7276d33df15580e0f3068d2417a01506cfb642" datatype="html">
+        <source> Enter Team Name</source><target state="final"> Enter Team Name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/teams/pages/create-team-page/create-team-page.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <note priority="1" from="description"> Label for the team input</note>
+        <note priority="1" from="meaning">Input label </note>
+      </trans-unit><trans-unit id="6723899a8eb9807eb47530a189d11e87dc02421c" datatype="html">
+        <source>Test</source><target state="final">Test</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/teams/pages/create-team-page/create-team-page.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <note priority="1" from="description"> Placeholder fot the team name input</note>
+        <note priority="1" from="meaning">Team name placeholder </note>
+      </trans-unit><trans-unit id="d70b96189cc700d6da1f121b4837aab07eb796b9" datatype="html">
+        <source>Submit</source><target state="final">Submit</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/teams/pages/create-team-page/create-team-page.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <note priority="1" from="description"> Button that will submit a new team after form is fille out </note>
+        <note priority="1" from="meaning">Submit button </note>
       </trans-unit>
+      
+      
     </body>
   </file>
 </xliff>

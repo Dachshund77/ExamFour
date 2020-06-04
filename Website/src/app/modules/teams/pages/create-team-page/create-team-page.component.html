@@ -7,14 +7,22 @@
             </div>
 
             <div class="flex-grow-1 app-bg--secondary app-container--secondary">
-                test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum
-                test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test
-                lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem
-                impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum
-                test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test
-                lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem
-                impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum test lorem impsum
-                test lorem impsum test lorem impsum test lorem impsum
+
+                <h1 class="text-center app-txt--secondary" i18n="Title | Title for the page">Create new Team</h1>
+
+                <form [formGroup]="createTeamForm" (ngSubmit)="submit()">
+                    <app-create-team-form formControlName="team"></app-create-team-form>
+                    <button>Sign Up</button>
+                </form>
+                <p>
+                    Form is {{createTeamForm.valid ? 'Valid' : 'Invalid'}}
+                </p>
+
+                <pre>
+                  {{createTeamForm.value | json}}
+                  </pre>
+
+
             </div>
 
             <div class="d-none d-sm-block app-sideDiv--right">

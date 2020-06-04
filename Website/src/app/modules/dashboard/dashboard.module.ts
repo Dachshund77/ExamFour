@@ -8,6 +8,7 @@ import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.co
 @NgModule({
   declarations: [
     DashboardPageComponent
+    
   ],
   imports: [
     CommonModule,
