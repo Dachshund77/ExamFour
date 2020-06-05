@@ -10,9 +10,9 @@
 
                 <h1 class="text-center app-txt--secondary" i18n="Title | Title for the page">Create new Team</h1>
 
-                <form [formGroup]="createTeamForm" (ngSubmit)="submit()">
-                    <app-create-team-form formControlName="team"></app-create-team-form>
-                    <button>Sign Up</button>
+                <form [formGroup]="createTeamForm" (ngSubmit)="submit()" class="form-group app-formGroup--secondary">
+                    <app-create-team-form formControlName="teamName"></app-create-team-form>
+                    <button class="btn app-btn--secondary">Sign Up</button>
                 </form>
                 <p>
                     Form is {{createTeamForm.valid ? 'Valid' : 'Invalid'}}

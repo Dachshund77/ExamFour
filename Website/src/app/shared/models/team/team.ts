@@ -1,12 +1,14 @@
+import { CreateTeamFormValues } from 'src/app/modules/teams/components/create-team-form/create-team-form.component';
+
 export class Team {
 
     public ID: number;
-    public name: string;
+    public teamName: string;
 
 
-    constructor(id: number = undefined, name: string = '') {
+    constructor(id: number = undefined, teamName: string = '') {
         this.ID = id;
-        this.name = name;
+        this.teamName = teamName;
     }
 
 }

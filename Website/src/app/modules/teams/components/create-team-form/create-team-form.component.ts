@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, forwardRef } from '@angular/core';
-import { FormGroup, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, FormBuilder, Validator, Validators } from '@angular/forms';
+import { Component, OnDestroy, forwardRef } from '@angular/core';
+import { FormGroup, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 export interface CreateTeamFormValues {
@@ -29,19 +29,14 @@ export class CreateTeamFormComponent implements ControlValueAccessor, OnDestroy 
   form: FormGroup;
   subscriptions: Subscription[] = [];
 
-  onChange: any = () => { console.log('ON CHANGE');
-  };
-  onTouched: any = () => {  console.log('ON TOUCH');
-};
+  onChange: any = () => { console.log('ON CHANGE');}; //This should get overwritten at init
+  onTouched: any = () => {  console.log('ON TOUCH');};
 
-  get value(): any {
+  get value(): CreateTeamFormValues {
     return this.form.value;
   }
 
-  set value(value: any) {
-    console.log('SET VALUE');
-    console.log(value);
-    
+  set value(value: CreateTeamFormValues) { 
     this.form.setValue(value);
     this.onChange(value);
     this.onTouched();
@@ -59,7 +54,7 @@ export class CreateTeamFormComponent implements ControlValueAccessor, OnDestroy 
 
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
-      this.form.valueChanges.subscribe(value => {
+      this.form.valueChanges.subscribe(value => {      
         this.onChange(value);
         this.onTouched();
       })
@@ -71,15 +66,10 @@ export class CreateTeamFormComponent implements ControlValueAccessor, OnDestroy 
   }
 
   registerOnChange(fn: any) {
-    console.log('REGISTER CHANGES');
-    console.log(this.form)
-
     this.onChange = fn;
   }
 
   writeValue(value: any) {
-    console.log('WRITE VALUE');
-    
     if (value) {
       this.value = value;
     }
@@ -89,18 +79,12 @@ export class CreateTeamFormComponent implements ControlValueAccessor, OnDestroy 
     }
   }
 
-
   registerOnTouched(fn: any) {
-    console.log('REGISTER TOUCHED');
-    console.log(this.form)
-    
     this.onTouched = fn;
   }
 
   // communicate the inner form validation to the parent form
   validate(_: FormControl) {
-    console.log('VALIDATE');
-    console.log(this.form.valid);
     return this.form.valid ? null : { team: { valid: false } };
   }
 
