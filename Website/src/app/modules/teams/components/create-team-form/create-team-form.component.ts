@@ -1,10 +1,6 @@
-import { Component, OnDestroy, forwardRef } from '@angular/core';
+import { Component, OnDestroy, forwardRef, OnInit } from '@angular/core';
 import { FormGroup, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-
-export interface CreateTeamFormValues {
-  teamName: string;
-}
 
 @Component({
   selector: 'app-create-team-form',
@@ -23,38 +19,40 @@ export interface CreateTeamFormValues {
     }
   ]
 })
-export class CreateTeamFormComponent implements ControlValueAccessor, OnDestroy {
+export class CreateTeamFormComponent implements ControlValueAccessor, OnDestroy, OnInit {
 
   //I would like to use the model directly?
   form: FormGroup;
   subscriptions: Subscription[] = [];
 
-  onChange: any = () => { console.log('ON CHANGE');}; //This should get overwritten at init
-  onTouched: any = () => {  console.log('ON TOUCH');};
+  onChange: any = () => { console.log('ON CHANGE'); }; //This should get overwritten at init
+  onTouched: any = () => { console.log('ON TOUCH'); };
 
-  get value(): CreateTeamFormValues {
+  get value(): any {
     return this.form.value;
   }
 
-  set value(value: CreateTeamFormValues) { 
+  set value(value: any) {
     this.form.setValue(value);
     this.onChange(value);
     this.onTouched();
   }
 
-  get teamNameControl() {
+  get teamName() {
     return this.form.controls.teamName;
   }
 
   constructor(private formBuilder: FormBuilder) {
     // create the inner form
     this.form = this.formBuilder.group({
-      teamName: ['',Validators.required],
+      teamName: ['', Validators.required],
     });
+  }
 
+  ngOnInit(): void {
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
-      this.form.valueChanges.subscribe(value => {      
+      this.form.valueChanges.subscribe(value => {
         this.onChange(value);
         this.onTouched();
       })

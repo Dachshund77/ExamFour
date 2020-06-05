@@ -17,9 +17,8 @@ a-blockName_elementName--modiferName
     background-color: rgb(236, 255, 251);
 }
 
-.app-btn--primary:hover {
+.app-btn--primary:hover:enabled {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 .app-bg--primary {
@@ -38,22 +37,26 @@ a-blockName_elementName--modiferName
 
 .app-formGroup--primary {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 .app-formGroup--primary>label {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 .app-formGroup--primary>input {
     /*placeholder so far*/
-    background-color: inherit;
+}
+
+.app-formGroup--primary input.ng-invalid {
+    border-color: red;
+}
+
+.app-formGroup--primary .app-input_errorText {
+    color: red;
 }
 
 .app-formGroup--primary>button {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 
@@ -130,7 +133,7 @@ a-blockName_elementName--modiferName
     background-color: rgb(151, 151, 255);
 }
 
-.app-btn--secondary:hover {
+.app-btn--secondary:hover:enabled {
     background-color: bisque;
 }
 
@@ -149,24 +152,24 @@ a-blockName_elementName--modiferName
     color: black;
 }
 
-.app-formGroup--secondary {
-    /*placeholder so far*/
-    background-color: inherit;
-}
+.app-formGroup--secondary {}
 
 .app-formGroup--secondary>label {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
-.app-formGroup--secondary>input {
-    /*placeholder so far*/
-    background-color: inherit;
+.app-formGroup--secondary input {}
+
+.app-formGroup--secondary input.ng-invalid {
+    border-color: red;
+}
+
+.app-formGroup--secondary .app-input_errorText {
+    color: red;
 }
 
 .app-formGroup--secondary>button {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 
@@ -174,7 +177,6 @@ a-blockName_elementName--modiferName
 
 .app-div_dropDown--secondary {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 
@@ -182,7 +184,6 @@ a-blockName_elementName--modiferName
 
 .app-dropBtn--secondary {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 
@@ -190,7 +191,6 @@ a-blockName_elementName--modiferName
 
 .app-div_dropDown--secondary:hover .app-dropBtn--secondary {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 .app-dropBtn_content--secondary {
@@ -203,7 +203,6 @@ a-blockName_elementName--modiferName
 
 .app-dropBtn_content--secondary a {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 
@@ -211,7 +210,6 @@ a-blockName_elementName--modiferName
 
 .app-dropBtn_content--secondary a:hover {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 
@@ -219,7 +217,6 @@ a-blockName_elementName--modiferName
 
 .app-div_dropDown--secondary:hover .app-dropBtn_content--secondary {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 
@@ -235,9 +232,8 @@ a-blockName_elementName--modiferName
     background-color: green;
 }
 
-.app-btn--tertiary:hover {
+.app-btn--tertiary:hover:enabled {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 .app-bg--tertiary {
@@ -263,22 +259,26 @@ a-blockName_elementName--modiferName
 
 .app-formGroup--tertiary {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 .app-formGroup--tertiary>label {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 .app-formGroup--tertiary>input {
     /*placeholder so far*/
-    background-color: inherit;
+}
+
+.app-formGroup--tertiary input.ng-invalid {
+    border-color: red;
+}
+
+.app-formGroup--tertiary .app-input_errorText {
+    color: red;
 }
 
 .app-formGroup--tertiary>button {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 
@@ -286,7 +286,6 @@ a-blockName_elementName--modiferName
 
 .app-div_dropDown--tertiary {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 
@@ -294,7 +293,6 @@ a-blockName_elementName--modiferName
 
 .app-dropBtn--tertiary {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 
@@ -302,12 +300,10 @@ a-blockName_elementName--modiferName
 
 .app-div_dropDown--tertiary:hover .app-dropBtn--tertiary {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 .app-dropBtn_content--tertiary {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 
@@ -315,7 +311,6 @@ a-blockName_elementName--modiferName
 
 .app-dropBtn_content--tertiary a {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 
@@ -323,7 +318,6 @@ a-blockName_elementName--modiferName
 
 .app-dropBtn_content--tertiary a:hover {
     /*placeholder so far*/
-    background-color: inherit;
 }
 
 
@@ -331,5 +325,4 @@ a-blockName_elementName--modiferName
 
 .app-div_dropDown--tertiary:hover .app-dropBtn_content--tertiary {
     /*placeholder so far*/
-    background-color: inherit;
 }

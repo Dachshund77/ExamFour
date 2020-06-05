@@ -12,7 +12,7 @@
 
                 <form [formGroup]="createTeamForm" (ngSubmit)="submit()" class="form-group app-formGroup--secondary">
                     <app-create-team-form formControlName="teamName"></app-create-team-form>
-                    <button class="btn app-btn--secondary">Sign Up</button>
+                    <button class="btn app-btn--secondary" [disabled]="createTeamForm.invalid">Sign Up</button>
                 </form>
                 <p>
                     Form is {{createTeamForm.valid ? 'Valid' : 'Invalid'}}

@@ -1,5 +1,3 @@
-import { CreateTeamFormValues } from 'src/app/modules/teams/components/create-team-form/create-team-form.component';
-
 export class Team {
 
     public ID: number;
