@@ -1,7 +1,7 @@
 <div [formGroup]="form">
     <label for="teamName" i18n="Input label | Label for the team input"> Enter Team Name</label>
     <br>
-    <input formControlName="teamName" id="teamName" type="text" class="form-control" placeholder="Test" i18n-placeholder="Team name placeholder | Placeholder fot the team name input">
+    <input formControlName="teamName" id="teamName" type="text" class="form-control" placeholder="Test" autocomplete="off" i18n-placeholder="Team name placeholder | Placeholder fot the team name input">
     <div *ngIf="teamName.valid">
         <small style="visibility: hidden;">
             reserved

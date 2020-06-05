@@ -25,8 +25,8 @@ export class CreateTeamFormComponent implements ControlValueAccessor, OnDestroy,
   form: FormGroup;
   subscriptions: Subscription[] = [];
 
-  onChange: any = () => { console.log('ON CHANGE'); }; //This should get overwritten at init
-  onTouched: any = () => { console.log('ON TOUCH'); };
+  onChange: any = () => { }; //This should get overwritten at init
+  onTouched: any = () => { };
 
   get value(): any {
     return this.form.value;

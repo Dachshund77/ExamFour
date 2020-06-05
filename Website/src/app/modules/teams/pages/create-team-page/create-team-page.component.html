@@ -1,36 +1,15 @@
-<div class="container-fluid row m-0 p-0 h-100">
-    <div class="d-flex flex-grow flex-column w-100">
+<app-standard-content-container>
+    <div class="container-fluid d-flex flex-column justify-content-start h-100 w-100">
+        <h1 class="text-center app-txt--secondary" i18n="Title | Title for the page">Create new Team</h1>
 
-        <div class="d-flex flex-grow-1 flex-row w-100 app-bg--tertiary ">
-            <div class="d-none d-sm-block app-sideDiv--left">
+        <p>
+            Here you can create a new team. After creation you will be the administrator of that team. Note that the name must be unique and can note be changed on a later date.
+        </p>
 
-            </div>
-
-            <div class="flex-grow-1 app-bg--secondary app-container--secondary">
-
-                <h1 class="text-center app-txt--secondary" i18n="Title | Title for the page">Create new Team</h1>
-
-                <form [formGroup]="createTeamForm" (ngSubmit)="submit()" class="form-group app-formGroup--secondary">
-                    <app-create-team-form formControlName="teamName"></app-create-team-form>
-                    <button class="btn app-btn--secondary" [disabled]="createTeamForm.invalid">Sign Up</button>
-                </form>
-                <p>
-                    Form is {{createTeamForm.valid ? 'Valid' : 'Invalid'}}
-                </p>
-
-                <pre>
-                  {{createTeamForm.value | json}}
-                  </pre>
-
-
-            </div>
-
-            <div class="d-none d-sm-block app-sideDiv--right">
-
-            </div>
-        </div>
-
-        <app-contact-bar></app-contact-bar>
+        <form [formGroup]="createTeamForm" (ngSubmit)="submit()" class="form-group app-formGroup--secondary">
+            <app-create-team-form formControlName="teamName"></app-create-team-form>
+            <button class="btn app-btn--secondary" [disabled]="createTeamForm.invalid">Sign Up</button>
+        </form>
     </div>
 
-</div>
+</app-standard-content-container>
