@@ -143,9 +143,13 @@ a-blockName_elementName--modiferName
 }
 
 .app-container--secondary {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     margin-top: 5px;
     margin-bottom: 5px;
     border-radius: 10px;
+    padding: 5px;
 }
 
 .app-txt--secondary {
@@ -154,9 +158,7 @@ a-blockName_elementName--modiferName
 
 .app-formGroup--secondary {}
 
-.app-formGroup--secondary>label {
-    /*placeholder so far*/
-}
+.app-formGroup--secondary label {}
 
 .app-formGroup--secondary input {}
 
@@ -166,11 +168,11 @@ a-blockName_elementName--modiferName
 
 .app-formGroup--secondary .app-input_errorText {
     color: red;
+    justify-self: center;
+    align-self: center;
 }
 
-.app-formGroup--secondary>button {
-    /*placeholder so far*/
-}
+.app-formGroup--secondary button {}
 
 
 /* Container for the drop down menu*/
@@ -325,4 +327,20 @@ a-blockName_elementName--modiferName
 
 .app-div_dropDown--tertiary:hover .app-dropBtn_content--tertiary {
     /*placeholder so far*/
+}
+
+
+/*********/
+
+
+/* Other */
+
+
+/*********/
+
+.app-div--centeredRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }

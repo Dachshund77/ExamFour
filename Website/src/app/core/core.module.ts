@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MenuBarComponent } from './header/menu-bar/menu-bar.component';
 
@@ -8,7 +9,8 @@ import { MenuBarComponent } from './header/menu-bar/menu-bar.component';
   declarations: [
     MenuBarComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule
   ],
   exports:[
     MenuBarComponent

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms'
-import { Team } from 'src/app/shared/models/team/team';
+import { NewTeam } from 'src/app/shared/models/newTeam/new-team';
+import { HttpTeamsService } from 'src/app/core/http/httpTeamsService/http-teams.service';
 
 @Component({
   selector: 'app-create-team-page',
@@ -11,7 +12,10 @@ export class CreateTeamPageComponent {
 
   createTeamForm: FormGroup
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private httpTeamsService: HttpTeamsService
+  ) {
 
     this.createTeamForm = this.formBuilder.group({
       teamName: []
@@ -24,10 +28,20 @@ export class CreateTeamPageComponent {
 
 
   submit() {
-    //Here we create shit
-    console.log(this.createTeamForm.value);
-    console.log("MODEL");
-    console.log(this.createTeamForm.get('teamName').value)
+    let teamName = this.createTeamForm.get('teamName').value
+
+    let newTeam = new NewTeam(teamName)
+
+    console.log(newTeam)
+
+window.alert("test")
+
+    try {
+      this.httpTeamsService.postTeam(newTeam).subscribe(team => console.log(team));
+    } catch (error) {
+      console.log('ERROR CATCH')
+    }
+
   }
 
 }

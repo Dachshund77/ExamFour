@@ -1,12 +1,13 @@
-export class Team {
+import { NewTeam } from '../newTeam/new-team';
+
+export class Team extends NewTeam {
 
     public ID: number;
-    public teamName: string;
-
-
+    
     constructor(id: number = undefined, teamName: string = '') {
+        super(teamName);
         this.ID = id;
-        this.teamName = teamName;
+        
     }
 
 }
