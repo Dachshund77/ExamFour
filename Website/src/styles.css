@@ -172,7 +172,13 @@ a-blockName_elementName--modiferName
     align-self: center;
 }
 
-.app-formGroup--secondary button {}
+.app-formGroup--secondary button {
+    background-color: rgb(151, 151, 255);
+}
+
+.app-formGroup--secondary button:hover:enabled {
+    background-color: green;
+}
 
 
 /* Container for the drop down menu*/

@@ -12,25 +12,14 @@ import { of } from 'rxjs';
 })
 export class CreateTeamPageComponent {
 
-  createTeamForm: FormGroup
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private httpTeamsService: HttpTeamsService
-  ) {
 
-    this.createTeamForm = this.formBuilder.group({
-      teamNameControl: []
-    });
-  }
+  constructor( ) { }
 
-  ngOnInit() {
-
-  }
-
-  makingHttpCall = false;
+ 
 
   submit() {
+    /*
     //init
     this.makingHttpCall = true;
 
@@ -51,6 +40,7 @@ export class CreateTeamPageComponent {
           this.makingHttpCall = false;
         }
       )
+*/
   }
 
 }

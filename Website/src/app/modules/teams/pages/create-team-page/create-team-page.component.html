@@ -5,17 +5,6 @@
         Here you can create a new team. After creation you will be the administrator of that team. Note that the name must be unique and can note be changed on a later date.
     </p>
 
-    <form [formGroup]="createTeamForm" (ngSubmit)="submit()" class="form-group app-formGroup--secondary">
-        <app-create-team-form formControlName="teamNameControl"></app-create-team-form>
-        <div class="app-div--centeredRow">
-            <button class="btn app-btn--secondary" (click)="submit()" type="button" [disabled]="createTeamForm.invalid">
-                <span *ngIf='makingHttpCall' class="spinner-border spinner-border-sm" role="status"
-                    aria-hidden="true"></span>
-                Sign Up
-            </button>
-
-        </div>
-
-    </form>
+    <app-create-team-form class="form-group app-formGroup--secondary"></app-create-team-form>
 
 </app-standard-content-container>

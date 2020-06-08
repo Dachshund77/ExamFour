@@ -1,19 +1,12 @@
-<div [formGroup]="form">
-    <label for="teamName" i18n="Input label | Label for the team input">Team Name</label>
-    <br>
-    <input formControlName="teamName" id="teamName" type="text" class="form-control" placeholder="Name" autocomplete="off" i18n-placeholder="Team name placeholder | Placeholder fot the team name input">
-    <div *ngIf="teamName.valid">
-        <small style="visibility: hidden;">
-            reserved
-        </small>
-    </div>
-    <div *ngIf="teamName.invalid">
-        <div *ngIf="teamName.errors.required">
-            <small class="app-input_errorText">
-                Team name is required.
-            </small>
+<div>
+    <form [formGroup]="createTeamForm" (ngSubmit)="submit()">
+        <app-create-team-form-teamname formControlName="teamNameControl"></app-create-team-form-teamname>
+        <div class="app-div--centeredRow">
+            <button class="btn" (click)="submit()" type="button" [disabled]="createTeamForm.invalid || makingHttpCall">
+                <span *ngIf='makingHttpCall' class="spinner-border spinner-border-sm" role="status"
+                    aria-hidden="true"></span>
+                Sign Up
+            </button>
         </div>
-
-
-    </div>
+    </form>
 </div>

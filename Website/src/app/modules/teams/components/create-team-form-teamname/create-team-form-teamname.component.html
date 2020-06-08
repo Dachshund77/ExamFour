@@ -1,0 +1,19 @@
+<div [formGroup]="form">
+    <label for="teamName" i18n="Input label | Label for the team input">Team Name</label>
+    <br>
+    <input formControlName="teamName" id="teamName" type="text" class="form-control" placeholder="Name" autocomplete="off" i18n-placeholder="Team name placeholder | Placeholder fot the team name input">
+    <div *ngIf="!teamName.invalid">
+        <small style="visibility: hidden;">
+            reserved
+        </small>
+    </div>
+    <div *ngIf="teamName.invalid">
+        <div *ngIf="teamName.errors.required">
+            <small class="app-input_errorText">
+                Team name is required.
+            </small>
+        </div>
+
+
+    </div>
+</div>

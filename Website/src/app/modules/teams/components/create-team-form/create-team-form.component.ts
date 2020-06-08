@@ -1,93 +1,58 @@
-import { Component, OnDestroy, forwardRef, OnInit } from '@angular/core';
-import { FormGroup, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Team } from 'src/app/shared/models/team/team';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { HttpTeamsService } from 'src/app/core/http/httpTeamsService/http-teams.service';
+import { NewTeam } from 'src/app/shared/models/newTeam/new-team';
+import { SimpleChanges } from "@angular/core";
 
 @Component({
   selector: 'app-create-team-form',
   templateUrl: './create-team-form.component.html',
-  styleUrls: ['./create-team-form.component.css'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CreateTeamFormComponent),
-      multi: true
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => CreateTeamFormComponent),
-      multi: true
-    }
-  ]
+  styleUrls: ['./create-team-form.component.css']
 })
-export class CreateTeamFormComponent implements ControlValueAccessor, OnDestroy, OnInit {
+export class CreateTeamFormComponent implements OnInit {
 
-  //I would like to use the model directly?
-  form: FormGroup;
-  subscriptions: Subscription[] = [];
+  createTeamForm: FormGroup
+  makingHttpCall : boolean = false;
 
-  onChange: any = () => { }; //This should get overwritten at init
-  onTouched: any = () => { };
-
-  get value(): any {
-    return this.form.value;
-  }
-
-  set value(value: any) {
-    this.form.setValue(value);
-    this.onChange(value);
-    this.onTouched();
-  }
-
-  get teamName() {
-    return this.form.controls.teamName;
-  }
-
-  constructor(private formBuilder: FormBuilder) {
-    // create the inner form
-    this.form = this.formBuilder.group({
-      teamName: ['', Validators.required],
+  constructor(
+    private httpTeamsService : HttpTeamsService,
+    private formBuilder: FormBuilder,
+  ) {
+    this.createTeamForm = this.formBuilder.group({
+      teamNameControl: []
     });
   }
 
   ngOnInit(): void {
-    this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
-      this.form.valueChanges.subscribe(value => {
-        this.onChange(value);
-        this.onTouched();
-      })
-    );
   }
 
-  ngOnDestroy() {
-    this.subscriptions.forEach(s => s.unsubscribe());
+  submit() {
+    if(this.makingHttpCall || !this.createTeamForm.valid){
+      return //premature abort
+    } else{
+      this.makingHttpCall = true;
+    } 
+
+    //get needed values
+    let teamName = this.createTeamForm.get('teamNameControl').value.teamName
+
+    //Format into object
+    let newTeam = new NewTeam(teamName)
+
+    //Call http service
+    this.httpTeamsService.postTeam(newTeam)
+      .subscribe(
+        res => { //Executed only on succes
+          //Should redirect probably
+          this.makingHttpCall = false;
+        },
+        err => { //Executed on error (duh)
+          this.makingHttpCall = false;
+        }
+      )
+      
   }
 
-  registerOnChange(fn: any) {
-    this.onChange = fn;
-  }
-
-  writeValue(value: any) {
-    if (value) {
-      this.value = value;
-    }
-
-    if (value === null) {
-      this.form.reset();
-    }
-  }
-
-  registerOnTouched(fn: any) {
-    this.onTouched = fn;
-  }
-
-  // communicate the inner form validation to the parent form
-  validate(_: FormControl) {
-    return this.form.valid ? null : { team: { valid: false } };
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    isDisabled ? this.form.disabled : this.form.enabled;
-  }
 
 }
