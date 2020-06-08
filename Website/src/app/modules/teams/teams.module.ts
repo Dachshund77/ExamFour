@@ -9,6 +9,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateTeamFormTeamnameComponent } from './components/create-team-form-teamname/create-team-form-teamname.component';
 import { CreateTeamFormComponent } from './components/create-team-form/create-team-form.component';
+import { SearchTeamFormComponent } from './components/search-team-form/search-team-form.component';
+import { SearchTeamFormTeamNameComponent } from './components/search-team-form-team-name/search-team-form-team-name.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { CreateTeamFormComponent } from './components/create-team-form/create-te
     ManageTeamPageComponent,
     SearchTeamPageComponent,
     CreateTeamFormComponent,
-    CreateTeamFormTeamnameComponent
+    CreateTeamFormTeamnameComponent,
+    SearchTeamFormComponent,
+    SearchTeamFormTeamNameComponent
   ],
   imports: [
     CommonModule,

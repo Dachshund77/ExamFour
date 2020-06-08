@@ -1,0 +1,6 @@
+.loc-collapsible ::ng-deep .collapsible {
+    border: black solid 1px;
+    border-radius: 5px;
+    margin: 5px;
+    min-height: 10px;
+}

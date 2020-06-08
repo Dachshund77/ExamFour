@@ -152,6 +152,10 @@ a-blockName_elementName--modiferName
     padding: 5px;
 }
 
+.app-container--secondary button {
+    background-color: rgb(151, 151, 255);
+}
+
 .app-txt--secondary {
     color: black;
 }

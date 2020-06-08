@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CreateTeamPageComponent } from './pages/create-team-page/create-team-page.component';
-import { ManageRacesPageComponent } from '../races/pages/manage-races-page/manage-races-page.component';
-import { SearchRacesPageComponent } from '../races/pages/search-races-page/search-races-page.component';
-import { ContactBarComponent } from 'src/app/shared/components/contact-bar/contact-bar.component';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { ManageTeamPageComponent } from './pages/manage-team-page/manage-team-page.component';
+import { SearchTeamPageComponent } from './pages/search-team-page/search-team-page.component';
 
 
 const routes: Routes = [
-  { path: 'manage', component: ManageRacesPageComponent },
+  { path: 'manage', component: ManageTeamPageComponent },
   { path: 'create', component: CreateTeamPageComponent },
-  { path: 'search', component: SearchRacesPageComponent },
+  { path: 'search', component: SearchTeamPageComponent },
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 

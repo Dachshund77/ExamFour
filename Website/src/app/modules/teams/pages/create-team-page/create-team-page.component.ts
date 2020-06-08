@@ -16,31 +16,4 @@ export class CreateTeamPageComponent {
 
   constructor( ) { }
 
- 
-
-  submit() {
-    /*
-    //init
-    this.makingHttpCall = true;
-
-    //get needed values
-    let teamName = this.createTeamForm.get('teamNameControl').value.teamName
-
-    //Format into object
-    let newTeam = new NewTeam(teamName)
-
-    //Call http service
-    this.httpTeamsService.postTeam(newTeam)
-      .subscribe(
-        res => { //Executed only on succes
-          //Should redirect probably
-          this.makingHttpCall = false;
-        },
-        err => { //Executed on error (duh)
-          this.makingHttpCall = false;
-        }
-      )
-*/
-  }
-
 }

@@ -1,0 +1,17 @@
+<div class="collapsible">
+    <div *ngIf="collapsed">
+        <ng-content></ng-content>
+    </div>
+    <div class="app-div--centeredRow">
+        <button (click)="toggle()" class="btn">
+            <div *ngIf="collapsed">
+                Hide
+            </div>
+            <div *ngIf="!collapsed">
+                Show
+            </div>
+        </button>
+    </div>
+
+
+</div>
