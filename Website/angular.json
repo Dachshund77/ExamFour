@@ -4,6 +4,13 @@
   "newProjectRoot": "projects",
   "projects": {
     "Website": {
+      "i18n": {
+        "locales": {
+          "de": "src/i18n/messages.de.xlf",
+          "da": "src/i18n/messages.da.xlf",
+          "en": "src/i18n/messages.en.xlf"
+        }
+      },
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -18,7 +25,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -45,7 +52,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -63,30 +69,20 @@
               ]
             },
             "de": {
-              "aot": true,
-              "outputPath": "dist/de",
-              "i18nFile": "src/i18n/messages.de.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "de",
-              "baseHref": "/de/"
-            },
+            "localize": [
+              "de"
+            ],
+              "outputPath": "dist"},
             "da": {
-              "aot": true,
-              "outputPath": "dist/da",
-              "i18nFile": "src/i18n/messages.da.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "da",
-              "baseHref": "/da/"              
-          
-            },
+            "localize": [
+              "da"
+            ],
+              "outputPath": "dist"},
             "en": {
-              "aot": true,
-              "outputPath": "dist/en",
-              "i18nFile": "src/i18n/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
-              "baseHref": "/en/"
-            }
+            "localize": [
+              "en"
+            ],
+              "outputPath": "dist"}
           }
         },
         "serve": {

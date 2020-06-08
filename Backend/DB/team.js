@@ -9,7 +9,8 @@ const teamSchema =
     new Schema({
         time: { //Please find a better name god damit brain
             type: timeSpanSchema,
-            required: [true, 'Time is required!'] //weird
+            required: [true, 'Time is required!'], //weird
+            default: () => ({})
         },
         //previous: {
         //    type: Schema.Types.ObjectId
@@ -20,7 +21,7 @@ const teamSchema =
         head: {
             type: Schema.Types.ObjectId,
             required: true,
-            default: function () {
+            default: function() {
                 return this._id
             }
         },
@@ -39,57 +40,32 @@ return this._id.internalID + this._id.test
 })
 */
 
-teamSchema.pre('save', async function (next) {
+
+
+
+teamSchema.pre('findOneAndUpdate', async function(next) {
     try {
-        //Might be obsolete
-        console.log('team pre save hook')
-        //this.time.endTime = undefined // We dont allow a endtime set on first creation
-
-        //this._id.internal = mongoose.mongo.ObjectID(); //overwrite id
-        //this._id.outdated = ""; //Overwite set it to null
-
-        next()
-    } catch (error) {
-        throw new mongoose.Error(error)
-    }
-});
-
-teamSchema.pre('save', async function (next) {
-    try {
-        console.log('I AN HAVE MULTIPLE')
-        //Defntly obsolete
-        next()
-    } catch (error) {
-        throw new mongoose.Error(error)
-    }
-
-});
-
-
-teamSchema.pre('findOneAndUpdate', async function (next) {
-    try {
-        console.log('team pre update hook')
 
         //Make copy of old one for historic reasons
-        await this.findOne({ _id: this._conditions._id }, function (err, doc) {
+        await this.findOne({ _id: this._conditions._id }, function(err, doc) {
             if (err) {
                 throw err
             } else {
-    
+
                 var olderOne = doc;
                 olderOne._id = mongoose.mongo.ObjectID();
 
                 olderOne.__v = doc.__v //For wahtever reason i cant update _v
 
                 //Set the old ones time
-                
+
                 olderOne.time.startTime = doc.time.startTime;
-                olderOne.time.endTime = Date.now();   
+                olderOne.time.endTime = Date.now();
 
                 //Save old one
                 olderOne.isNew = true;
                 console.log(olderOne)
-                
+
                 olderOne.save()
             }
         });
@@ -142,9 +118,8 @@ teamSchema.pre('findOneAndUpdate', async function (next) {
 
 
 
-teamSchema.pre(['update', 'findOneAndUpdate'], async function (next) {
+teamSchema.pre(['update', 'findOneAndUpdate'], async function(next) {
     try {
-        //console.log(this.increment())
         this.update({}, { $inc: { __v: 1 } })
         next()
     } catch (error) {
@@ -153,7 +128,7 @@ teamSchema.pre(['update', 'findOneAndUpdate'], async function (next) {
 });
 
 //var test = mongoose.model('teamModel', teamSchema)
-teamSchema.pre('findOne', async function (next) {
+teamSchema.pre('findOne', async function(next) {
     //this._id.internalID = mongoose.mongo.ObjectID();
     //this._id.test = 'fuck'
     //console.log('pre find one_')
@@ -170,7 +145,7 @@ teamSchema.pre('findOne', async function (next) {
 });
 
 //Cleans up coordinates when removed
-teamSchema.post(['remove', 'findOneAndRemove', 'deleteMany', 'deleteOne'], async function (doc) {
+teamSchema.post(['remove', 'findOneAndRemove', 'deleteMany', 'deleteOne'], async function(doc) {
     //init   
 
     let coordinateModel = mongoose.model('coordinateModel')
@@ -185,7 +160,7 @@ teamSchema.post(['remove', 'findOneAndRemove', 'deleteMany', 'deleteOne'], async
  * Overwriting for custom JSON responses
  */
 //https://jsonapi.org/
-teamSchema.methods.toJSON = function () {
+teamSchema.methods.toJSON = function() {
     return {
         type: 'Team',
         _id: this._id,
@@ -208,4 +183,4 @@ teamSchema.methods.toJSON = function () {
 
 exports.schema = teamSchema;
 exports.model = mongoose.model('teamModel', teamSchema)
-//exports.model = test
+    //exports.model = test

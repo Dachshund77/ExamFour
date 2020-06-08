@@ -9,13 +9,15 @@ var isValidObjectID = require('../middlewares/isValidObjectID');
 var router = express.Router();
 
 //Post a Team
-router.post('/', async function (req, res) {
+router.post('/', async function(req, res) {
     try {
+        console.log(req.body)
+
         //Init values
         var newTeam = new Team(req.body);
 
         //Insert in DB
-        newTeam.save(function (err) {
+        newTeam.save(function(err) {
             if (err) {
                 if (err.code === 11000) {
                     //duplicate key
@@ -26,14 +28,12 @@ router.post('/', async function (req, res) {
 
                     res.status(400).json(responses.badRequest("Validation failed for request", err));
                     return
-                }
-                else { //need other error
+                } else { //need other error
                     //catch all clasue
                     res.status(500).json(responses.internalServerError("Database error occured", err));
                     return
                 }
-            }
-            else {
+            } else {
                 //successfully inserted               
                 res.status(201).json(responses.created(newTeam));
             }
@@ -51,21 +51,21 @@ router.post('/', async function (req, res) {
 //Update a device 
 router.put('/:_id', [
     isValidObjectID
-], async function (req, res) {
+], async function(req, res) {
     try {
         //Update in db
         //BUG! in JSON Passing along the object id that has cahnge break this, why even allow updae to id?
-        Team.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true }, function (err, doc) {
+        Team.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true }, function(err, doc) {
             if (err) {
                 if (err.code === 11000) {
                     //duplicate key
                     res.status(400).json(responses.badRequest("Key exists already in database", err));
                     return
-                } if (err instanceof mongoose.Error.ValidationError) {
+                }
+                if (err instanceof mongoose.Error.ValidationError) {
                     res.status(400).json(responses.badRequest("Validation failed for request", err));
                     return
-                }
-                else { //need other error
+                } else { //need other error
                     //catch all clasue
                     res.status(500).json(responses.internalServerError("Database error occured", err));
                     return
@@ -75,8 +75,7 @@ router.put('/:_id', [
                     //Could not find ressource
                     res.status(404).json(responses.notFound("Ressource was not found for " + req.params._id));
                     return
-                }
-                else {
+                } else {
                     //respond on succes
                     res.status(200).json(responses.ok(doc));
                     return
@@ -91,22 +90,20 @@ router.put('/:_id', [
 });
 
 //Delete a Team by id 
-router.delete('/:_id', [isValidObjectID], async function (req, res) {
+router.delete('/:_id', [isValidObjectID], async function(req, res) {
     try {
         //delete
-        await Team.deleteOne({ _id: req.params._id }, function (err, doc) {
+        await Team.deleteOne({ _id: req.params._id }, function(err, doc) {
             if (err) {
                 if (err instanceof mongoose.Error.ValidationError) {
                     res.status(400).json(responses.badRequest("Validation failed for request", err));
                     return
-                }
-                else {
+                } else {
                     //catch all clasue
                     res.status(500).json(responses.internalServerError("Database error occured", err));
                     return
                 }
-            }
-            else {
+            } else {
                 if (doc.n == 0) { //Not maatched with anything
                     //Could not find ressource
                     res.status(404).json(responses.notFound("Ressource was not found for " + req.params._id));
@@ -116,33 +113,30 @@ router.delete('/:_id', [isValidObjectID], async function (req, res) {
                 }
             }
         });
-    }
-    catch (err) {
+    } catch (err) {
         console.log(err);
         res.status(500).json(responses.internalServerError("Unexpected error occured", err))
     }
 });
 
 //Get by id 
-router.get('/:_id/:outdated?', [isValidObjectID], async function (req, res) {
+router.get('/:_id/:outdated?', [isValidObjectID], async function(req, res) {
     try {
         //AN OBJECT ID IS ALWAYS 24 CHARS
 
         console.log(req.query.outdated);
         //'_id.internal': req.params._id
-        await Team.findOne({ '_id.internal': req.params._id, '_id.outdated': req.query.outdated }, function (err, doc) {
+        await Team.findOne({ '_id.internal': req.params._id, '_id.outdated': req.query.outdated }, function(err, doc) {
             if (err) {
                 if (err instanceof mongoose.Error.ValidationError) {
                     res.status(400).json(responses.badRequest("Validation failed for request", err));
                     return
-                }
-                else {
+                } else {
                     //catch all clasue
                     res.status(500).json(responses.internalServerError("Database error occured", err));
                     return
                 }
-            }
-            else {
+            } else {
                 if (doc == null) {
                     //Could not find ressource
                     res.status(404).json(responses.notFound("Ressource was not found"));
@@ -154,20 +148,18 @@ router.get('/:_id/:outdated?', [isValidObjectID], async function (req, res) {
                 }
             }
         });
-    }
-    catch (err) {
+    } catch (err) {
         console.log(err);
         res.status(500).json(responses.internalServerError("Unexpected error occured", err))
     }
 });
 
 //Get by filer 
-router.get('/:filter?', async function (req, res) {
+router.get('/:filter?', async function(req, res) {
     try {
         console.log('GET BY FILTER')
         res.end();
-    }
-    catch (err) {
+    } catch (err) {
         console.log(err);
         res.status(500).json(responses.internalServerError("Unexpected error occured", err))
     }

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms'
 import { NewTeam } from 'src/app/shared/models/newTeam/new-team';
 import { HttpTeamsService } from 'src/app/core/http/httpTeamsService/http-teams.service';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-create-team-page',
@@ -18,7 +20,7 @@ export class CreateTeamPageComponent {
   ) {
 
     this.createTeamForm = this.formBuilder.group({
-      teamName: []
+      teamNameControl: []
     });
   }
 
@@ -26,22 +28,29 @@ export class CreateTeamPageComponent {
 
   }
 
+  makingHttpCall = false;
 
   submit() {
-    let teamName = this.createTeamForm.get('teamName').value
+    //init
+    this.makingHttpCall = true;
 
+    //get needed values
+    let teamName = this.createTeamForm.get('teamNameControl').value.teamName
+
+    //Format into object
     let newTeam = new NewTeam(teamName)
 
-    console.log(newTeam)
-
-window.alert("test")
-
-    try {
-      this.httpTeamsService.postTeam(newTeam).subscribe(team => console.log(team));
-    } catch (error) {
-      console.log('ERROR CATCH')
-    }
-
+    //Call http service
+    this.httpTeamsService.postTeam(newTeam)
+      .subscribe(
+        res => { //Executed only on succes
+          //Should redirect probably
+          this.makingHttpCall = false;
+        },
+        err => { //Executed on error (duh)
+          this.makingHttpCall = false;
+        }
+      )
   }
 
 }

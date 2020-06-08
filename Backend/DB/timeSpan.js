@@ -5,7 +5,8 @@ const timeSpanSchema = new Schema({
     type: {
         type: String,
         enum: ['Timespan'],
-        required: true
+        required: true,
+        default: 'Timespan'
     },
     startTime: {
         type: Date,

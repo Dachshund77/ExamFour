@@ -6,9 +6,14 @@
     </p>
 
     <form [formGroup]="createTeamForm" (ngSubmit)="submit()" class="form-group app-formGroup--secondary">
-        <app-create-team-form formControlName="teamName"></app-create-team-form>
+        <app-create-team-form formControlName="teamNameControl"></app-create-team-form>
         <div class="app-div--centeredRow">
-            <button class="btn app-btn--secondary" [disabled]="createTeamForm.invalid">Sign Up</button>
+            <button class="btn app-btn--secondary" (click)="submit()" type="button" [disabled]="createTeamForm.invalid">
+                <span *ngIf='makingHttpCall' class="spinner-border spinner-border-sm" role="status"
+                    aria-hidden="true"></span>
+                Sign Up
+            </button>
+
         </div>
 
     </form>

@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MenuBarComponent } from './header/menu-bar/menu-bar.component';
+import { HttpErrorHandlerInterceptor } from './interceptors/httpErrorHandler/http-error-handler.interceptor';
 
 
 @NgModule({
@@ -12,8 +13,15 @@ import { MenuBarComponent } from './header/menu-bar/menu-bar.component';
     CommonModule,
     HttpClientModule
   ],
-  exports:[
+  exports: [
     MenuBarComponent
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorHandlerInterceptor,
+      multi: true
+    }
   ]
 })
 export class CoreModule { }
