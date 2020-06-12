@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Team } from 'src/app/shared/models/team/team';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search-team-page',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchTeamPageComponent implements OnInit {
 
-  constructor() { }
+  queriedTeams : Team[];
+
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.queriedTeams = []
+  }
+
+  displaySearchResult(teams : Team[]){
+    //Optional paramters and shit
+    this.queriedTeams = [] //reset
+    
+    teams.forEach(element => {
+      this.queriedTeams.push(element)
+    });
   }
 
 }

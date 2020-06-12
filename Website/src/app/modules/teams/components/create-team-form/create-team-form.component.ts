@@ -36,7 +36,7 @@ export class CreateTeamFormComponent implements OnInit {
 
     //get needed values
     let teamName = this.createTeamForm.get('teamNameControl').value.teamName
-
+    
     //Format into object
     let newTeam = new NewTeam(teamName)
 
@@ -45,14 +45,22 @@ export class CreateTeamFormComponent implements OnInit {
       .subscribe(
         res => { //Executed only on succes
           //Should redirect probably
+          console.log(res);
+          
           this.makingHttpCall = false;
+          console.log('TODO REDIRECT');
+          
         },
         err => { //Executed on error (duh)
+          console.log(err);
+
           this.makingHttpCall = false;
         }
       )
       
   }
+
+  
 
 
 }

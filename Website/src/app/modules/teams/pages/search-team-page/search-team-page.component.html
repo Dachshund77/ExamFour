@@ -4,6 +4,9 @@
     <p>Here you can search for a team.</p>
 
     <app-collapsible-container class="loc-collapsible">
-        the fuck
+        <app-search-team-form class="form-group app-formGroup--secondary" (onSearch)="displaySearchResult($event)"></app-search-team-form>
     </app-collapsible-container>
+    <div *ngFor="let item of queriedTeams">
+        <app-team-list-item [team]="item"></app-team-list-item>
+    </div>
 </app-standard-content-container>

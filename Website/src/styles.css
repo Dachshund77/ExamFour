@@ -152,6 +152,16 @@ a-blockName_elementName--modiferName
     padding: 5px;
 }
 
+.app-container--secondary .app-listItem {
+    margin: 1px;
+    border: 1px solid black;
+    background-color: chartreuse;
+}
+
+.app-container--secondary .app-listItem:hover {
+    background-color: red;
+}
+
 .app-container--secondary button {
     background-color: rgb(151, 151, 255);
 }
@@ -353,4 +363,8 @@ a-blockName_elementName--modiferName
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+.no-bullets {
+    list-style: none;
 }

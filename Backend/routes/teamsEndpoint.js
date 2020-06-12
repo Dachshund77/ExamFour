@@ -120,7 +120,7 @@ router.delete('/:_id', [isValidObjectID], async function(req, res) {
 });
 
 //Get by id 
-router.get('/:_id/:outdated?', [isValidObjectID], async function(req, res) {
+router.get('/:_id/:outdated?', [isValidObjectID], async function(req, res) { //The fuck is this outdated stuff... did i code while on crack?
     try {
         //AN OBJECT ID IS ALWAYS 24 CHARS
 
@@ -155,10 +155,26 @@ router.get('/:_id/:outdated?', [isValidObjectID], async function(req, res) {
 });
 
 //Get by filer 
-router.get('/:filter?', async function(req, res) {
+router.get('/:teamName?', async function(req, res) { //Insted of passing on big query in it is easyer to pass multiple query params
     try {
-        console.log('GET BY FILTER')
-        res.end();
+        var filter = {}
+        if (req.query.teamName != null) {
+            filter.teamName = { $regex: req.query.teamName } //We format regEx, we sohuld probably not allow special sin in teamNames
+        }
+
+        console.log(filter);
+
+        await Team.find(filter, function(err, doc) {
+            if (err) {
+                //catch all clasue
+                res.status(500).json(responses.internalServerError("Database error occured", err));
+                return
+            } else {
+                //respond on succes //200 
+                res.status(200).json(responses.ok(doc));
+                return
+            }
+        });
     } catch (err) {
         console.log(err);
         res.status(500).json(responses.internalServerError("Unexpected error occured", err))

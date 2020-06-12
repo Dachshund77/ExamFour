@@ -1,1 +1,12 @@
-<p>search-team-form works!</p>
+<div>
+    <form [formGroup]="searchTeamForm" (ngSubmit)="findTeams()">
+        <app-search-team-form-team-name formControlName="teamNameControl"></app-search-team-form-team-name>
+        <div class="app-div--centeredRow">
+            <button class="btn" (click)="findTeams()" type="button" [disabled]="makingHttpCall">
+                <span *ngIf='makingHttpCall' class="spinner-border spinner-border-sm" role="status"
+                    aria-hidden="true"></span>
+                Find Teams
+            </button>
+        </div>
+    </form>
+</div>

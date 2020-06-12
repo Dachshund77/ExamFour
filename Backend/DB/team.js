@@ -64,7 +64,7 @@ teamSchema.pre('findOneAndUpdate', async function(next) {
 
                 //Save old one
                 olderOne.isNew = true;
-                console.log(olderOne)
+
 
                 olderOne.save()
             }

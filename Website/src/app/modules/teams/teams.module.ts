@@ -11,6 +11,7 @@ import { CreateTeamFormTeamnameComponent } from './components/create-team-form-t
 import { CreateTeamFormComponent } from './components/create-team-form/create-team-form.component';
 import { SearchTeamFormComponent } from './components/search-team-form/search-team-form.component';
 import { SearchTeamFormTeamNameComponent } from './components/search-team-form-team-name/search-team-form-team-name.component';
+import { TeamListItemComponent } from './components/team-list-item/team-list-item.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { SearchTeamFormTeamNameComponent } from './components/search-team-form-t
     CreateTeamFormComponent,
     CreateTeamFormTeamnameComponent,
     SearchTeamFormComponent,
-    SearchTeamFormTeamNameComponent
+    SearchTeamFormTeamNameComponent,
+    TeamListItemComponent
   ],
   imports: [
     CommonModule,

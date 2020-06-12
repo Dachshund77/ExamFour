@@ -29,8 +29,10 @@ export class CreateTeamFormTeamnameComponent implements ControlValueAccessor, On
   onChange: any = () => { }; //This should get overwritten at init
   onTouched: any = () => { };
 
-  get value(): any {
-    return this.form.value;
+  get value(): any { //For wahtever reason this is totaly useless... would be greate if we could format this beforehand
+    //return this.form.value;
+    console.log('getValue')
+    return 'BITCH'
   }
 
   set value(value: any) {
