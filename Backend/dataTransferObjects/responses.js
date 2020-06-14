@@ -1,4 +1,3 @@
-
 /**
  * Json template for response codes of 200
  */
@@ -49,6 +48,34 @@ exports.badRequest = function badRequest(msg, err) { //Note that this does not s
 }
 
 /**
+ * Json template for response codes of 401
+ */
+exports.unauthorized = function unauthorized(msg, err) { //Note that this does not support lists
+    if (!(err instanceof Array) && err != undefined) { //Always eturn it wrapped in a list
+        err = [err]
+    }
+    return {
+        status: 'fail',
+        message: msg,
+        errors: err
+    }
+}
+
+/**
+ * Json template for response codes of 403
+ */
+exports.forbidden = function forbidden(msg, err) { //Note that this does not support lists
+    if (!(err instanceof Array) && err != undefined) { //Always eturn it wrapped in a list
+        err = [err]
+    }
+    return {
+        status: 'fail',
+        message: msg,
+        errors: err
+    }
+}
+
+/**
  * Json template for response codes of 404
  */
 exports.notFound = function notFound(msg, err) { //Note that this does not support lists
@@ -62,9 +89,24 @@ exports.notFound = function notFound(msg, err) { //Note that this does not suppo
     }
 }
 
+/**
+ * Json template for response codes of 409
+ */
+exports.conflict = function conflict(msg, err) { //Note that this does not support lists
+    if (!(err instanceof Array) && err != undefined) { //Always eturn it wrapped in a list
+        err = [err]
+    }
+    return {
+        status: 'fail',
+        message: msg,
+        errors: err
+    }
+}
+
+
 /*
-* Template for 500 response code
-*/
+ * Template for 500 response code
+ */
 exports.internalServerError = function internalServerError(msg, err) { //Thee a case to be made that this shoud allow multiple
     if (!(err instanceof Array) && err != undefined) { //Always eturn it wrapped in a list
         err = [err]
@@ -75,7 +117,3 @@ exports.internalServerError = function internalServerError(msg, err) { //Thee a 
         errors: err
     }
 }
-
-
-
-

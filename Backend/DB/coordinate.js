@@ -27,12 +27,11 @@ const coordinateSchema =
         location: {
             type: pointSchema,
             required: [true, 'Location is required!']
-            //Kinda repeating error message on validation
+                //Kinda repeating error message on validation
         }
-    },
-        {
-            timestamps: { createdAt: 'createdAt' }, //This will create a timestap when crated https://mongoosejs.com/docs/guide.html#
-        });
+    }, {
+        timestamps: { createdAt: 'createdAt' }, //This will create a timestap when crated https://mongoosejs.com/docs/guide.html#
+    });
 
 async function teamRecordExists(val) { //Well technical this failing should lead to a 400 bad request not 500.
     try {
@@ -58,7 +57,7 @@ async function raceRecordExists(val) {
 }
 
 
-coordinateSchema.pre(['update', 'findOneAndUpdate'], async function (next) {
+coordinateSchema.pre(['update', 'findOneAndUpdate'], async function(next) {
     try {
         //console.log(this.increment())
         this.update({}, { $inc: { __v: 1 } })
@@ -72,7 +71,7 @@ coordinateSchema.pre(['update', 'findOneAndUpdate'], async function (next) {
  * Overwriting for custom JSON responses
  */
 //https://jsonapi.org/
-coordinateSchema.methods.toJSON = function () {
+coordinateSchema.methods.toJSON = function() {
     return {
         type: 'Coordinate',
         _id: this._id,
@@ -109,5 +108,5 @@ coordinateSchema.methods.toJSON = function () {
     }
 }
 
-exports.schema = coordinateSchema;
-exports.model = mongoose.model('coordinateModel', coordinateSchema);
+
+module.exports = mongoose.model('coordinateModel', coordinateSchema);

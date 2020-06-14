@@ -11,7 +11,7 @@ export class SearchTeamPageComponent implements OnInit {
 
   queriedTeams : Team[];
 
-  constructor(private route: ActivatedRoute) { }
+  constructor() { }
 
   ngOnInit() {
     this.queriedTeams = []

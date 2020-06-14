@@ -10,7 +10,12 @@ const teamSchema =
         time: { //Please find a better name god damit brain
             type: timeSpanSchema,
             required: [true, 'Time is required!'], //weird
-            default: () => ({})
+            default: () => ({}) //This invokes the childrens required
+        },
+        admin: {
+            type: Schema.Types.ObjectId,
+            ref: "userModel",
+            required: [true, 'Admins ID is required!'],
         },
         //previous: {
         //    type: Schema.Types.ObjectId
@@ -167,6 +172,7 @@ teamSchema.methods.toJSON = function() {
         attributes: {
             time: this.time,
             teamName: this.teamName,
+            admin: this.admin
         },
         links: {
             self: "http://localhost:3000/teams/" + this._id,
@@ -181,6 +187,6 @@ teamSchema.methods.toJSON = function() {
 }
 
 
-exports.schema = teamSchema;
-exports.model = mongoose.model('teamModel', teamSchema)
-    //exports.model = test
+//exports.schema = teamSchema;
+//exports.model = mongoose.model('teamModel', teamSchema)
+module.exports = mongoose.model('teamModel', teamSchema)

@@ -20,7 +20,7 @@ let raceSchema =
             default: Date.now(),
             required: [true, 'End time is required!'],
             validate: {
-                validator: function (v) {
+                validator: function(v) {
                     if (this.endTime < this.startTime) {
                         return false;
                     } else {
@@ -40,13 +40,13 @@ let raceSchema =
         }
     });
 
-raceSchema.post(['remove', 'findOneAndRemove', 'deleteMany', 'deleteOne'],  async function (doc) {
+raceSchema.post(['remove', 'findOneAndRemove', 'deleteMany', 'deleteOne'], async function(doc) {
     //init   
     //console.log(doc) //We could in theory fuck with the doc
     //doc.test = 'sss'
     let coordinateModel = mongoose.model('coordinateModel')
     let removeID = this._conditions._id; //The called paramter in the url
-    
+
     //Removing coordiantes that are realted
     await coordinateModel.deleteMany({ raceID: removeID });
 
@@ -57,7 +57,7 @@ raceSchema.post(['remove', 'findOneAndRemove', 'deleteMany', 'deleteOne'],  asyn
  * Overwriting for custom JSON responses
  */
 //https://jsonapi.org/
-raceSchema.methods.toJSON = function () {
+raceSchema.methods.toJSON = function() {
     return {
         type: 'Race',
         _id: this._id,
@@ -77,5 +77,6 @@ raceSchema.methods.toJSON = function () {
     }
 }
 
-exports.schema = raceSchema;
-exports.model = mongoose.model('raceModel', raceSchema)
+//exports.schema = raceSchema;
+//exports.model = mongoose.model('raceModel', raceSchema)
+module.exports = mongoose.model('raceModel', raceSchema)

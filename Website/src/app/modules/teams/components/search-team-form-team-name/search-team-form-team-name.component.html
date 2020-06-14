@@ -1,9 +1,15 @@
-<div [formGroup]="form">
+<div [formGroup]="form" class="form-group">
     <label for="teamName" i18n="Input label | Label for the team input">Team Name</label>
     <br>
-    <input formControlName="teamName" id="teamName" type="text" class="form-control" placeholder="Name" autocomplete="off" i18n-placeholder="Team name placeholder | Placeholder fot the team name input">
-    <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" formControlName="teamNameExact" id="teamNameExact">
-        <label class="custom-control-label" for="teamNameExact">Exact</label>
+    <div class="row w-100">
+        <div class="col-10">
+            <input formControlName="teamName" id="teamName" type="text" class="form-control" placeholder="Name" autocomplete="off" i18n-placeholder="Team name placeholder | Placeholder fot the team name input">
+        </div>
+        <div class="col-2">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" formControlName="teamNameExact" id="teamNameExact">
+                <label class="custom-control-label" for="teamNameExact">Exact</label>
+            </div>
+        </div>
     </div>
 </div>

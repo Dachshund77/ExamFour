@@ -1,15 +1,23 @@
 var express = require('express');
 var mongoose = require('mongoose')
-
-var Team = require('../DB/team.js').model;
+var Team = mongoose.model('teamModel')
 var responses = require('../dataTransferObjects/responses');
 var isValidObjectID = require('../middlewares/isValidObjectID');
+var requireAuthorisation = require("../middlewares/requireAuthorization")
+var requireAuthentication = require("../middlewares/requireAuthentication")
+var authorizeUserWithRoles = require("../middlewares/authorizeUserWithRoles")
+var authorizeOwner = require("../middlewares/authorizeTeamEndpointOwner")
 
 
 var router = express.Router();
 
 //Post a Team
-router.post('/', async function(req, res) {
+router.post('/', [
+    requireAuthentication,
+    authorizeUserWithRoles(['Admin', 'User']),
+    requireAuthorisation,
+    isValidObjectID
+], async function(req, res) {
     try {
         console.log(req.body)
 
@@ -50,6 +58,10 @@ router.post('/', async function(req, res) {
 
 //Update a device 
 router.put('/:_id', [
+    requireAuthentication,
+    authorizeOwner,
+    authorizeUserWithRoles(['Admin']),
+    requireAuthorisation,
     isValidObjectID
 ], async function(req, res) {
     try {
@@ -90,7 +102,13 @@ router.put('/:_id', [
 });
 
 //Delete a Team by id 
-router.delete('/:_id', [isValidObjectID], async function(req, res) {
+router.delete('/:_id', [
+    requireAuthentication,
+    authorizeOwner,
+    authorizeUserWithRoles(['Admin']),
+    requireAuthorisation,
+    isValidObjectID
+], async function(req, res) {
     try {
         //delete
         await Team.deleteOne({ _id: req.params._id }, function(err, doc) {
@@ -120,13 +138,15 @@ router.delete('/:_id', [isValidObjectID], async function(req, res) {
 });
 
 //Get by id 
-router.get('/:_id/:outdated?', [isValidObjectID], async function(req, res) { //The fuck is this outdated stuff... did i code while on crack?
+router.get('/:_id', [
+    requireAuthentication,
+    authorizeUserWithRoles(['Admin', 'User']),
+    requireAuthorisation,
+    isValidObjectID
+], async function(req, res) {
     try {
-        //AN OBJECT ID IS ALWAYS 24 CHARS
 
-        console.log(req.query.outdated);
-        //'_id.internal': req.params._id
-        await Team.findOne({ '_id.internal': req.params._id, '_id.outdated': req.query.outdated }, function(err, doc) {
+        await Team.findOne({ '_id': req.params._id }, function(err, doc) {
             if (err) {
                 if (err instanceof mongoose.Error.ValidationError) {
                     res.status(400).json(responses.badRequest("Validation failed for request", err));
@@ -155,7 +175,13 @@ router.get('/:_id/:outdated?', [isValidObjectID], async function(req, res) { //T
 });
 
 //Get by filer 
-router.get('/:teamName?', async function(req, res) { //Insted of passing on big query in it is easyer to pass multiple query params
+router.get('/:teamName?', [
+    requireAuthentication,
+    authorizeOwner,
+    authorizeUserWithRoles(['Admin']),
+    requireAuthorisation,
+    isValidObjectID
+], async function(req, res) { //Insted of passing on big query in it is easyer to pass multiple query params
     try {
         var filter = {}
         if (req.query.teamName != null) {
