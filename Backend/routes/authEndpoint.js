@@ -51,11 +51,9 @@ router.post('/registration', async function(req, res) {
 //User login (Assigning of token) as standard way
 router.post('/login', async function(req, res) {
     try {
-        //Init values 
-        var clientUser = new User(req.body);
 
         //find user 
-        var dbUser = await User.findOne({ name: clientUser.name })
+        var dbUser = await User.findOne({ name: req.body.name })
         if (dbUser == null) {
             //User not found in db
             res.status(404).json(responses.notFound("User not found", clientUser));
@@ -63,11 +61,11 @@ router.post('/login', async function(req, res) {
         }
 
         //Comparing                    
-        var isCorrect = bcrypt.compareSync(clientUser.password, dbUser.password);
+        var isCorrect = bcrypt.compareSync(req.body.pw, dbUser.password);
 
         if (isCorrect) {
             //Assign token (Password does not need to go in the toke?)
-            var token = jwt.sign({ name: clientUser.name, _id: clientUser._id }, config.secret, { expiresIn: 300000000 })
+            var token = jwt.sign({ name: req.body.name, _id: req.body.pw }, config.secret, { expiresIn: 300000000 })
                 //Return token
             res.status(200).json(responses.ok({ "token": token })); //Dirty as fuck, probaly should define a DTO
             return;

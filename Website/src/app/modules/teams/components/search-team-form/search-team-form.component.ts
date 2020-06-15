@@ -39,7 +39,6 @@ export class SearchTeamFormComponent implements OnInit {
     //let teamName = this.searchTeamForm.get('teamNameControl').value.teamName
     //let teamNameExact = this.searchTeamForm.get('teamNameControl').value.teamNameExact
 
-    console.log(this.searchTeamForm.get('teamNameControl').value);
     let teamName = this.searchTeamForm.get('teamNameControl').value;
 
     this.httpTeamsService.getFilteredTeams(teamName)

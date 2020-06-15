@@ -1,0 +1,23 @@
+<div [formGroup]="form">
+    <label for="userName" i18n="Input label | Label for the team input">User name</label>
+    <br>
+    <input formControlName="userName" id="userName" type="text" class="form-control" placeholder="Name" autocomplete="off">
+    <div *ngIf="!userName.invalid">
+        <small style="visibility: hidden;">
+            reserved
+        </small>
+    </div>
+    <div *ngIf="userName.invalid">
+        <div *ngIf="userName.errors.required">
+            <small class="app-input_errorText">
+                Username is required.
+            </small>
+        </div>
+        <div *ngIf="userName.errors.minlength">
+            <small class="app-input_errorText">
+                username minlength is 3.
+            </small>
+        </div>
+
+    </div>
+</div>

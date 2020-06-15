@@ -1,0 +1,13 @@
+<div>
+    <form [formGroup]="loginForm" (ngSubmit)="submit()">
+        <app-login-form-user-name formControlName="userNameControl"></app-login-form-user-name>
+        <app-login-form-password formControlName="passwordControl"></app-login-form-password>
+        <div class="app-div--centeredRow">
+            <button class="btn" (click)="submit()" type="button" [disabled]="loginForm.invalid || makingHttpCall">
+                <span *ngIf='makingHttpCall' class="spinner-border spinner-border-sm" role="status"
+                    aria-hidden="true"></span>
+                Sign Up
+            </button>
+        </div>
+    </form>
+</div>
