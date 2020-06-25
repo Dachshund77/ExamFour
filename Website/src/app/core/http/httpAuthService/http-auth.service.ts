@@ -22,4 +22,9 @@ export class HttpAuthService {
           return res.data[0].token
         }));
   }
+
+  register(name: string, password: string): Observable<string> {
+    return this.http.post<any>(this.authUrl + '/registration', { name, password }, { headers: this.headers })
+    //Should probably return a user moel or something
+  }
 }

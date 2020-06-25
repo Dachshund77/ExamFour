@@ -34,6 +34,21 @@ export class HttpTeamsService {
         }));
   };
 
+  getById(_id: string): Observable<Team> {
+    console.log('GET by ID')
+  
+    //let params = new HttpParams().set("_id", _id)
+
+    return this.http.get<any>(this.teamsUrl+"/"+_id, { headers: this.headers })
+    .pipe(
+      map((res) => {
+        return new Team( //Dirty but works
+          res.data[0]._id,
+          res.data[0].attributes.teamName
+        )
+      }));
+  };
+
   getFilteredTeams(teamName: string): Observable<Team[]> {
     console.log('GET FILTERED')
     console.log(teamName);

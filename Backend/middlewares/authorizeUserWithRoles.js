@@ -21,9 +21,11 @@ var middleware =
                     //Decode 
                     var decoded = jwt.decode(token);
 
+                    console.log(decoded);
+
 
                     //get dbUser from DB and chache it into res
-                    var dbUser = await User.findOne({ name: decoded._id })
+                    var dbUser = await User.findOne({ name: decoded.name })
 
                     //Test against allowed roles
                     userRole = dbUser.role;

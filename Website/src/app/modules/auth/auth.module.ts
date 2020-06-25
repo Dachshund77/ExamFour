@@ -9,10 +9,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { LoginFormUserNameComponent } from './components/login-form-user-name/login-form-user-name.component';
 import { LoginFormPasswordComponent } from './components/login-form-password/login-form-password.component';
+import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
-  declarations: [LoginPageComponent, RegistrationPageComponent, LoginFormComponent, LoginFormUserNameComponent, LoginFormPasswordComponent],
+  declarations: [LoginPageComponent, RegistrationPageComponent, LoginFormComponent, LoginFormUserNameComponent, LoginFormPasswordComponent, RegistrationFormComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

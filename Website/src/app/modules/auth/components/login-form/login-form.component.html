@@ -10,4 +10,13 @@
             </button>
         </div>
     </form>
+
+    <div class="app-div--centeredRow">
+        <button class="btn" type="button" [disabled]="makingHttpCall" routerLink="/auth/register">
+            <span *ngIf='makingHttpCall' class="spinner-border spinner-border-sm" role="status"
+                aria-hidden="true"></span>
+            Register
+        </button>
+    </div>
+
 </div>

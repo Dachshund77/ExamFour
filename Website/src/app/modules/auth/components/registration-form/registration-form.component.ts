@@ -1,28 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { HttpTeamsService } from 'src/app/core/http/httpTeamsService/http-teams.service';
 import { HttpAuthService } from 'src/app/core/http/httpAuthService/http-auth.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/authentication/authService/auth.service';
 
 @Component({
-  selector: 'app-login-form',
-  templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.css']
+  selector: 'app-registration-form',
+  templateUrl: './registration-form.component.html',
+  styleUrls: ['./registration-form.component.css']
 })
-export class LoginFormComponent implements OnInit {
+export class RegistrationFormComponent implements OnInit {
 
-
-  loginForm: FormGroup
+  registrationForm: FormGroup
   makingHttpCall: boolean = false;
 
   constructor(
     private httpAuthService: HttpAuthService,
     private formBuilder: FormBuilder,
-    private router : Router,
-    private authServie : AuthService
+    private router : Router
   ) {
-    this.loginForm = this.formBuilder.group({
+    this.registrationForm = this.formBuilder.group({
       userNameControl: [],
       passwordControl: []
     });
@@ -33,15 +29,15 @@ export class LoginFormComponent implements OnInit {
 
   submit() {
 
-    if (this.makingHttpCall || !this.loginForm.valid) {
+    if (this.makingHttpCall || !this.registrationForm.valid) {
       return //premature abort
     } else {
       this.makingHttpCall = true;
     }
 
     //get needed values
-    let userName = this.loginForm.get('userNameControl').value
-    let pw = this.loginForm.get('passwordControl').value
+    let userName = this.registrationForm.get('userNameControl').value
+    let pw = this.registrationForm.get('passwordControl').value
 
     console.log(userName);
     console.log(pw);
@@ -49,14 +45,13 @@ export class LoginFormComponent implements OnInit {
     
 
     //Call http service
-    this.httpAuthService.login(userName, pw)
+    this.httpAuthService.register(userName, pw)
       .subscribe(
         res => { //Executed only on succes
           //Should redirect probably
           console.log(res);
 
           this.makingHttpCall = false;
-          this.authServie.setToken(res); 
           this.router.navigate(['/dashboard'])
 
         },
@@ -67,4 +62,7 @@ export class LoginFormComponent implements OnInit {
         }
       )
   }
+
+  
+
 }

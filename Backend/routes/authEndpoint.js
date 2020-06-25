@@ -13,6 +13,7 @@ router.post('/registration', async function(req, res) {
     try {
         //Init values
         var newUser = new User(req.body);
+        console.log(newUser);
 
         //generate password
         newUser.password = bcrypt.hashSync(newUser.password, bcrypt.genSaltSync(10));
@@ -65,7 +66,7 @@ router.post('/login', async function(req, res) {
 
         if (isCorrect) {
             //Assign token (Password does not need to go in the toke?)
-            var token = jwt.sign({ name: req.body.name, _id: req.body.pw }, config.secret, { expiresIn: 300000000 })
+            var token = jwt.sign({ name: req.body.name, pw: req.body.pw }, config.secret, { expiresIn: 300000000 })
                 //Return token
             res.status(200).json(responses.ok({ "token": token })); //Dirty as fuck, probaly should define a DTO
             return;

@@ -8,11 +8,12 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class HttpErrorHandlerInterceptor implements HttpInterceptor {
 
-  constructor() { }
+  constructor(private router : Router) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> { //Thats a be all end all catch clause
     return next.handle(request).pipe(
@@ -25,6 +26,9 @@ export class HttpErrorHandlerInterceptor implements HttpInterceptor {
         else {
           console.log('INTERCEPTOR this is server side error'); //server problems, should come after other error coees handlers
           errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
+          if (error.status == 403 || 401) {
+            this.router.navigate(['/auth/login'])
+          }
         }
         console.log(errorMsg);
         return throwError(error);
