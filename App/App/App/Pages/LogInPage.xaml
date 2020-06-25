@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="App.Pages.LogInPage"
+             Title="Log in"
+             IsBusy="{Binding IsBusy}">>
+    <ContentPage.Content>
+        <StackLayout>
+            <Image Source="Claimy_Ai_Logo.png"
+                   VerticalOptions="Start" 
+                   HorizontalOptions="FillAndExpand" />
+            <Entry x:Name="UserNameEntry"
+                   Text="{Binding UserNameEntry, Mode=TwoWay}"
+                   Placeholder="Username"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Fill"/>
+            <Label x:Name="UserNameValidationHelp"
+                   Text="{Binding UserNameHelpText}"
+                   HorizontalOptions="Fill"
+                   TextColor="Red"/>
+            <Entry x:Name="PasswordEntry"
+                   Text="{Binding PasswordEntry, Mode=TwoWay}"
+                   Placeholder="Password"
+                   IsPassword="True"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="FillAndExpand"/>
+            <Label x:Name="PasswordValidationHelp"
+                   Text="{Binding PasswordHelpText}"                   
+                   HorizontalOptions="Fill"
+                   TextColor="Red"/>
+            <Button x:Name="LogInButton"
+                   Text="Log in!"
+                   VerticalOptions="EndAndExpand" 
+                   HorizontalOptions="FillAndExpand"
+                   Command="{Binding TryLogInCMD}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
