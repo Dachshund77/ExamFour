@@ -17,9 +17,7 @@ constructor(
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log('AUTH GUARD CALLED');
-      console.log(this.authService.getToken());
-      
+     
     if(this.authService.getToken() == null || this.authService.getToken() == undefined){
       this.router.navigate(['/auth/login'])
     } else{

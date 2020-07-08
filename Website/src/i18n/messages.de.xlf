@@ -68,36 +68,67 @@
         <note priority="1" from="meaning">Menu item </note>
       </trans-unit><trans-unit id="fb51e5e15d7377044e300d45bc1eac6fe73e4881" datatype="html">
         <source>Create new Team</source><target state="new">Create new Team</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/teams/pages/create-team-page/create-team-page.component.html</context>
-          <context context-type="linenumber">11</context>
-        </context-group>
+        
         <note priority="1" from="description"> Title for the page</note>
         <note priority="1" from="meaning">Title </note>
-      </trans-unit><trans-unit id="db7276d33df15580e0f3068d2417a01506cfb642" datatype="html">
-        <source> Enter Team Name</source><target state="new"> Enter Team Name</target>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/modules/teams/pages/create-team-page/create-team-page.component.html</context><context context-type="linenumber">2</context></context-group></trans-unit><trans-unit id="2ccd3314bf5a186d53230aa1c07f5625feada65b" datatype="html">
+        <source>Team Name</source><target state="new">Team Name</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/teams/pages/create-team-page/create-team-page.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="sourcefile">src/app/modules/teams/components/create-team-form-teamname/create-team-form-teamname.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/teams/components/search-team-form-team-name/search-team-form-team-name.component.html</context>
+          <context context-type="linenumber">2</context>
         </context-group>
         <note priority="1" from="description"> Label for the team input</note>
         <note priority="1" from="meaning">Input label </note>
-      </trans-unit><trans-unit id="6723899a8eb9807eb47530a189d11e87dc02421c" datatype="html">
-        <source>Test</source><target state="new">Test</target>
+      </trans-unit><trans-unit id="5e2a6171c59bbeeab26206a49e8e9a0840926757" datatype="html">
+        <source>Name</source><target state="new">Name</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/teams/pages/create-team-page/create-team-page.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="sourcefile">src/app/modules/teams/components/create-team-form-teamname/create-team-form-teamname.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/teams/components/search-team-form-team-name/search-team-form-team-name.component.html</context>
+          <context context-type="linenumber">6</context>
         </context-group>
         <note priority="1" from="description"> Placeholder fot the team name input</note>
         <note priority="1" from="meaning">Team name placeholder </note>
-      </trans-unit><trans-unit id="d70b96189cc700d6da1f121b4837aab07eb796b9" datatype="html">
-        <source>Submit</source><target state="new">Submit</target>
+      </trans-unit><trans-unit id="9dcde7cb3a34463d71e68010cbd244cc98c5ea61" datatype="html">
+        <source>See Team</source><target state="new">See Team</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/teams/pages/create-team-page/create-team-page.component.html</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="sourcefile">src/app/modules/teams/pages/see-team-page/see-team-page.component.html</context>
+          <context context-type="linenumber">2</context>
         </context-group>
-        <note priority="1" from="description"> Button that will submit a new team after form is fille out </note>
-        <note priority="1" from="meaning">Submit button </note>
+        <note priority="1" from="description"> Title for the page</note>
+        <note priority="1" from="meaning">Title </note>
+      </trans-unit><trans-unit id="6a2e707e3a6d647358680b7e192f891b227493c5" datatype="html">
+        <source>
+        ID: <x id="INTERPOLATION" equiv-text="{{team.ID}}"/> Test
+    </source><target state="new">
+        ID: <x id="INTERPOLATION" equiv-text="{{team.ID}}"/> Test
+    </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/teams/pages/see-team-page/see-team-page.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit><trans-unit id="eb2d033a27056bf6e87efcb7ece3d95247eb2193" datatype="html">
+        <source>User name</source><target state="new">User name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/components/login-form-user-name/login-form-user-name.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <note priority="1" from="description"> Label for the team input</note>
+        <note priority="1" from="meaning">Input label </note>
+      </trans-unit><trans-unit id="6129162a1d719defa62d201e182a61028eb646aa" datatype="html">
+        <source>Password</source><target state="new">Password</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/components/login-form-password/login-form-password.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <note priority="1" from="description"> Label for the team input</note>
+        <note priority="1" from="meaning">Input label </note>
       </trans-unit>
       
       

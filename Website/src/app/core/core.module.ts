@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MenuBarComponent } from './header/menu-bar/menu-bar.component';
 import { HttpErrorHandlerInterceptor } from './interceptors/httpErrorHandler/http-error-handler.interceptor';
 import { JwtTokenInterceptor } from './interceptors/TokenSetter/jwt-token.interceptor';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { JwtTokenInterceptor } from './interceptors/TokenSetter/jwt-token.interc
     MenuBarComponent],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   exports: [
     MenuBarComponent

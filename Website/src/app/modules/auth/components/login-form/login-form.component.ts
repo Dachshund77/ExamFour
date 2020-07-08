@@ -57,6 +57,7 @@ export class LoginFormComponent implements OnInit {
 
           this.makingHttpCall = false;
           this.authServie.setToken(res); 
+          this.authServie.setUserName(userName);
           this.router.navigate(['/dashboard'])
 
         },

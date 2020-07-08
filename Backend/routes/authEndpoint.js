@@ -57,7 +57,7 @@ router.post('/login', async function(req, res) {
         var dbUser = await User.findOne({ name: req.body.name })
         if (dbUser == null) {
             //User not found in db
-            res.status(404).json(responses.notFound("User not found", clientUser));
+            res.status(404).json(responses.notFound("User not found"));
             return;
         }
 
